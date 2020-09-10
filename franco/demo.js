@@ -7,19 +7,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 /** ignore this comment */
 const fs = require("fs");
-const psaas_js_api_1 = require("psaas-js-api");
-let serverConfig = new psaas_js_api_1.defaults.ServerConfiguration();
+
+const dogribData = '../dogrib_demo/'
+const modeller = require("psaas-js-api");
+let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
-psaas_js_api_1.globals.SocketHelper.initialize(
+modeller.globals.SocketHelper.initialize(
     serverConfig.builderAddress,
     serverConfig.builderPort
 );
 //turn on debug messages
-psaas_js_api_1.globals.PSaaSLogger.getInstance().setLogLevel(
-    psaas_js_api_1.globals.PSaaSLogLevel.DEBUG
+modeller.globals.PSaaSLogger.getInstance().setLogLevel(
+    modeller.globals.PSaaSLogLevel.DEBUG
 );
 //set the default MQTT broker to use when listening for PSaaS events
-psaas_js_api_1.client.JobManager.setDefaults({
+modeller.client.JobManager.setDefaults({
     host: serverConfig.mqttAddress,
     port: serverConfig.mqttPort,
     topic: serverConfig.mqttTopic,
@@ -39,19 +41,19 @@ if (localDir.includes("@JOBS@")) {
 //an asynchronous function for creating a job and listening for status messages.
 (async function () {
     //fetch the default settings for some parameters from PSaaS Builder
-    let jDefaults = await new psaas_js_api_1.defaults.JobDefaults().getDefaultsPromise();
-    psaas_js_api_1.globals.PSaaSLogger.getInstance().info(
+    let jDefaults = await new modeller.defaults.JobDefaults().getDefaultsPromise();
+    modeller.globals.PSaaSLogger.getInstance().info(
         "Building Prometheus job."
     );
     //set this to the location of the test files folder.
-    let prom = new psaas_js_api_1.psaas.PSaaS();
+    let prom = new modeller.psaas.PSaaS();
     //add the projection and elevation files as attachments
     let projContents = fs.readFileSync(
-        localDir + psaasVersion + "/test/elevation.prj",
+        dogribData + "/elevation.prj",
         "utf8"
     );
     let elevContents = fs.readFileSync(
-        localDir + psaasVersion + "/test/elevation.asc",
+        dogribData + "/elevation.asc",
         "utf8"
     );
     let projAttachment = prom.addAttachment("elevation.prj", projContents);
@@ -62,43 +64,43 @@ if (localDir.includes("@JOBS@")) {
     prom.setProjectionFile("" + projAttachment);
     prom.setElevationFile("" + elevAttachment);
     //add the rest of the files as paths to locations on disk
-    prom.setFuelmapFile(localDir + psaasVersion + "/test/fbp_fuel_type.asc");
-    prom.setLutFile(localDir + psaasVersion + "/test/fbp_lookup_table.lut");
+    prom.setFuelmapFile(dogribData + "/fbp_fuel_type.asc");
+    prom.setLutFile(dogribData + "/fbp_lookup_table.lut");
     prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
     let degree_curing = prom.addGridFile(
-        psaas_js_api_1.psaas.GridFileType.DEGREE_CURING,
-        localDir + psaasVersion + "/test/degree_of_curing.asc",
-        localDir + psaasVersion + "/test/degree_of_curing.prj"
+        modeller.psaas.GridFileType.DEGREE_CURING,
+        dogribData + "/degree_of_curing.asc",
+        dogribData + "/degree_of_curing.prj"
     );
     let fuel_patch = prom.addLandscapeFuelPatch(
         "O-1a Matted Grass",
         "O-1b Standing Grass"
     );
     let gravel_road = prom.addFileFuelBreak(
-        localDir + psaasVersion + "/test/access_gravel_road.kmz"
+        dogribData + "/access_gravel_road.kmz"
     );
     gravel_road.setName("Gravel Road");
     let unimproved_road = prom.addFileFuelBreak(
-        localDir + psaasVersion + "/test/access_unimproved_road.kmz"
+        dogribData + "/access_unimproved_road.kmz"
     );
     unimproved_road.setName("Unimproved Road");
     let river = prom.addFileFuelBreak(
-        localDir + psaasVersion + "/test/hydrology_river.kmz"
+        dogribData + "/hydrology_river.kmz"
     );
     river.setName("Rivers");
     let stream = prom.addFileFuelBreak(
-        localDir + psaasVersion + "/test/hydrology_stream.kmz"
+        dogribData + "/hydrology_stream.kmz"
     );
     stream.setName("Streams");
     let ws = prom.addWeatherStation(
         1483.0,
-        new psaas_js_api_1.globals.LatLon(51.6547, -115.3617)
+        new modeller.globals.LatLon(51.6547, -115.3617)
     );
     let b3Yaha = ws.addWeatherStream(
-        localDir + psaasVersion + "/test/weather_B3_hourly_Sep25toOct30_2001.txt",
+        dogribData + "/weather_B3_hourly_Sep25toOct30_2001.txt",
         94.0,
         17,
-        psaas_js_api_1.psaas.HFFMCMethod.LAWSON,
+        modeller.psaas.HFFMCMethod.LAWSON,
         89.0,
         58.0,
         482.0,
@@ -113,58 +115,58 @@ if (localDir.includes("@JOBS@")) {
         "21:00:00"
     );
     wpatch.setWindDirOperation(
-        psaas_js_api_1.psaas.WeatherPatchOperation.PLUS,
+        modeller.psaas.WeatherPatchOperation.PLUS,
         10
     );
-    wpatch.setRhOperation(psaas_js_api_1.psaas.WeatherPatchOperation.PLUS, 5);
+    wpatch.setRhOperation(modeller.psaas.WeatherPatchOperation.PLUS, 5);
     let wpatch2 = prom.addFileWeatherPatch(
-        localDir + psaasVersion + "/test/weather_patch_wd270.kmz",
+        dogribData + "/weather_patch_wd270.kmz",
         "2001-10-16T13:00:00",
         "13:00:00",
         "2001-10-16T21:00:00",
         "21:00:00"
     );
     wpatch2.setWindDirOperation(
-        psaas_js_api_1.psaas.WeatherPatchOperation.EQUAL,
+        modeller.psaas.WeatherPatchOperation.EQUAL,
         270
     );
     //create the ignition points
-    let ll1 = new psaas_js_api_1.globals.LatLon(
+    let ll1 = new modeller.globals.LatLon(
         51.65287648142513,
         -115.4779078053444
     );
     let ig3 = prom.addPointIgnition("2001-10-16T13:00:00", ll1);
-    let ll2 = new psaas_js_api_1.globals.LatLon(
+    let ll2 = new modeller.globals.LatLon(
         51.66090499909746,
         -115.4086430000001
     );
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
     let polyign = prom.addFileIgnition(
         "2001-10-16T13:00:00",
-        localDir + psaasVersion + "/test/poly_ign.kmz",
+        dogribData + "/poly_ign.kmz",
         "This should be a polygon."
     );
     let lineign = prom.addFileIgnition(
         "2001-10-16T13:00:00",
-        localDir + psaasVersion + "/test/line_fire.shp",
+        dogribData + "/line_fire.shp",
         "This should be a line."
     );
     //emit some statistics at the end of timesteps
     prom.timestepSettings.addStatistic(
-        psaas_js_api_1.globals.GlobalStatistics.TOTAL_BURN_AREA
+        modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
     );
     prom.timestepSettings.addStatistic(
-        psaas_js_api_1.globals.GlobalStatistics.DATE_TIME
+        modeller.globals.GlobalStatistics.DATE_TIME
     );
     prom.timestepSettings.addStatistic(
-        psaas_js_api_1.globals.GlobalStatistics.SCENARIO_NAME
+        modeller.globals.GlobalStatistics.SCENARIO_NAME
     );
     //create a scenario
     let scen1 = prom.addScenario("2001-10-16T13:00:00", "2001-10-16T22:00:00");
     scen1.setName("scen0");
     scen1.addBurningCondition("2001-10-16", 0, 24, 19, 0.0, 95.0, 0.0);
     scen1.setFgmOptions(
-        psaas_js_api_1.globals.Duration.createTime(0, 2, 0, false),
+        modeller.globals.Duration.createTime(0, 2, 0, false),
         1.0,
         1.0,
         1.0,
@@ -180,7 +182,7 @@ if (localDir.includes("@JOBS@")) {
     scen1.setProbabilisticValues(
         1.0,
         1.0,
-        psaas_js_api_1.globals.Duration.createTime(0, 0, 10, false)
+        modeller.globals.Duration.createTime(0, 0, 10, false)
     );
     scen1.setFbpOptions(true, true);
     scen1.setFmcOptions(-1, 0.0, true, false);
@@ -194,7 +196,7 @@ if (localDir.includes("@JOBS@")) {
     scen1.addWeatherPatchReference(wpatch, 3);
     scen1.addWeatherPatchReference(wpatch2, 2);
     let ovf1 = prom.addOutputVectorFileToScenario(
-        psaas_js_api_1.psaas.VectorFileType.KML,
+        modeller.psaas.VectorFileType.KML,
         "scen0/perim.kml",
         "2001-10-16T13:00:00",
         "2001-10-16T22:00:00",
@@ -205,17 +207,17 @@ if (localDir.includes("@JOBS@")) {
     ovf1.removeIslands = true;
     ovf1.metadata = jDefaults.metadataDefaults;
     let ogf1 = prom.addOutputGridFileToScenario(
-        psaas_js_api_1.globals.GlobalStatistics.TEMPERATURE,
+        modeller.globals.GlobalStatistics.TEMPERATURE,
         "scen0/temp.txt",
         "2001-10-16T21:00:00",
-        psaas_js_api_1.psaas.Output_GridFileInterpolation.IDW,
+        modeller.psaas.Output_GridFileInterpolation.IDW,
         scen1
     );
     let ogf2 = prom.addOutputGridFileToScenario(
-        psaas_js_api_1.globals.GlobalStatistics.BURN_GRID,
+        modeller.globals.GlobalStatistics.BURN_GRID,
         "scen0/burn_grid.tif",
         "2001-10-16T22:00:00",
-        psaas_js_api_1.psaas.Output_GridFileInterpolation.IDW,
+        modeller.psaas.Output_GridFileInterpolation.IDW,
         scen1
     );
     //allow the file to be streamed to a remote location after it is written (ex. streamOutputToMqtt, streamOutputToGeoServer).
@@ -243,7 +245,7 @@ if (localDir.includes("@JOBS@")) {
         //trim the name of the newly started job
         let jobName = wrapper.name.replace(/^\s+|\s+$/g, "");
         //a manager for listening for status messages
-        let manager = new psaas_js_api_1.client.JobManager(jobName);
+        let manager = new modeller.client.JobManager(jobName);
         //start the job manager
         await manager.start();
         //when the PSaaS job triggers that it is complete, shut down the listener
