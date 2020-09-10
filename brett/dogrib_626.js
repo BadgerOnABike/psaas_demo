@@ -44,8 +44,8 @@ modeller.client.JobManager.setDefaults({
     prom.setProjectionFile("" + projAttachment);
     prom.setElevationFile("" + elevAttachment);
     //add the rest of the files as paths to locations on disk
-    prom.setFuelmapFile("./Dogrib_dataset/fbp_fuel_type.asc");
-    prom.setLutFile("./Dogrib_dataset/fbp_lookup_table.lut");
+    prom.setFuelmapFile("../Dogrib_dataset/fbp_fuel_type.asc");
+    prom.setLutFile("../Dogrib_dataset/fbp_lookup_table.lut");
     prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
     let degree_curing = prom.addGridFile(
         modeller.psaas.GridFileType.DEGREE_CURING,
