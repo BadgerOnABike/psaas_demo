@@ -1,0 +1,54 @@
+{
+    "fgmOptions": {
+        "maxAccTs": "PT0H02M",
+        "distanceResolution": 2,
+        "perimeterResolution": 2,
+        "minimumSpreadingRos": 1.0,
+        "stopAtGridEnd": false,
+        "breaching": true,
+        "dynamicSpatialThreshold": false,
+        "spotting": false,
+        "purgeNonDisplayable": true,
+        "dx": 0.0,
+        "dy": 0.0,
+        "dt": "PT0H",
+        "growthPercentileApplied": false,
+        "growthPercentile": 0.1
+    },
+    "fbpOptions": {
+        "windEffect": false,
+        "greenUp": false,
+        "terrainEffect": true
+    },
+    "fmcOptions": {
+        "noDataElev": 3000.0,
+        "percentOverride": 0.5,
+        "terrain": true
+    },
+    "fwiOptions": {
+        "fwiSpatialInterpolation": true,
+        "fwiFromSpatialWeather": true,
+        "historyOnEffectedFwi": true,
+        "burningConditionsOn": false,
+        "fwiTemporalInterpolation": false
+    },
+    "summaryFileDefaults": {
+        "inputSummary": true,
+        "elevationInfo": true,
+        "location": true,
+        "gridInfo": true,
+        "timeToExecute": true
+    },
+    "vectorFileMetadata": {
+        "perimeterUnit": 1,
+        "areaUnits": 1,
+        "activePerimeter": true,
+        "totalPerimeter": true,
+        "fireSize": true,
+        "simulationDate": true,
+        "ignitionName": true,
+        "jobName": true,
+        "scenarioName": true,
+        "psaasVersion": true
+    }
+}
