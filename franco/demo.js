@@ -29,15 +29,8 @@ modeller.client.JobManager.setDefaults({
     password: serverConfig.mqttPassword,
 });
 //the directory of the test files
-let localDir = serverConfig.exampleDirectory;
-let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
-//make sure the local directory has been configured
-if (localDir.includes("@JOBS@")) {
-    console.log(
-        "The job directory has not been configured. Please edit the job directory before running the example server."
-    );
-    process.exit();
-}
+
+
 //an asynchronous function for creating a job and listening for status messages.
 (async function () {
     //fetch the default settings for some parameters from PSaaS Builder
