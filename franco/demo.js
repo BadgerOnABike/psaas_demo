@@ -145,11 +145,11 @@ modeller.client.JobManager.setDefaults({
         -115.4086430000001
     );
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
-    let polyign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        dogribData + "/poly_ign.kmz",
-        "This should be a polygon."
-    );
+    // let polyign = prom.addFileIgnition(
+    //     "2001-10-16T13:00:00",
+    //     dogribData + "/poly_ign.kmz",
+    //     "This should be a polygon."
+    // );
     let lineign = prom.addFileIgnition(
         "2001-10-16T13:00:00",
         dogribData + "/line_fire.shp",
