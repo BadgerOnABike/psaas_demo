@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 /** ignore this comment */
 const fs = require("fs");
-
+console.log("Launching demo...")
 const dogribData = '../dogrib_demo/'
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
