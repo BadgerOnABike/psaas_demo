@@ -24,6 +24,14 @@ modeller.globals.PSaaSLogger.getInstance().setLogLevel(
     modeller.globals.PSaaSLogLevel.DEBUG
 );
 //set the default MQTT broker to use when listening for PSaaS events
+console.log("initializing connection to MQTT:", {
+    host: serverConfig.mqttAddress,
+    port: serverConfig.mqttPort,
+    topic: serverConfig.mqttTopic,
+    username: serverConfig.mqttUsername,
+    password: serverConfig.mqttPassword,
+})
+
 modeller.client.JobManager.setDefaults({
     host: serverConfig.mqttAddress,
     port: serverConfig.mqttPort,
