@@ -12,6 +12,9 @@ const dogribData = '../Dogrib_dataset/'
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
+
+console.log("initializing connection to builder:", serverConfig.builderAddress,
+    serverConfig.builderPort)
 modeller.globals.SocketHelper.initialize(
     serverConfig.builderAddress,
     serverConfig.builderPort
