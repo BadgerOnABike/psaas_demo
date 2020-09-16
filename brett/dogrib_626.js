@@ -101,9 +101,9 @@ modeller.client.JobManager.setDefaults({
     );
     wpatch2.setWindDirOperation(modeller.psaas.WeatherPatchOperation.EQUAL, 270);
     //create the ignition points
-    let ll1 = new modeller.globals.LatLon(51.65287648142513, -115.4779078053444);
+    let ll1 = await new modeller.globals.LatLon(51.65287648142513, -115.4779078053444);
     let ig3 = prom.addPointIgnition("2001-10-16T13:00:00", ll1);
-    let ll2 = new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
+    let ll2 = await new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
     //let polyign = prom.addFileIgnition(
     //  "2001-10-16T13:00:00",
@@ -126,7 +126,7 @@ modeller.client.JobManager.setDefaults({
         modeller.globals.GlobalStatistics.SCENARIO_NAME
     );
     //create a scenario
-    let scen1 = prom.addScenario("2001-10-16T13:00:00", "2001-10-16T22:00:00");
+    let scen1 = await prom.addScenario("2001-10-16T13:00:00", "2001-10-16T22:00:00");
     scen1.setName("Best Dogrib Fit");
     scen1.addBurningCondition("2001-10-16", 0, 24, 19, 0.0, 95.0, 0.0);
     scen1.setFgmOptions(
@@ -170,14 +170,14 @@ modeller.client.JobManager.setDefaults({
     ovf1.multPerim = true;
     ovf1.removeIslands = true;
     ovf1.metadata = jDefaults.metadataDefaults;
-    let ogf1 = prom.addOutputGridFileToScenario(
+    let ogf1 = await prom.addOutputGridFileToScenario(
         modeller.globals.GlobalStatistics.TEMPERATURE,
         "best_fit/temp.txt",
         "2001-10-16T21:00:00",
         modeller.psaas.Output_GridFileInterpolation.IDW,
         scen1
     );
-    let ogf2 = prom.addOutputGridFileToScenario(
+    let ogf2 = await prom.addOutputGridFileToScenario(
         modeller.globals.GlobalStatistics.BURN_GRID,
         "best_fit/burn_grid.tif",
         "2001-10-16T22:00:00",
@@ -186,7 +186,7 @@ modeller.client.JobManager.setDefaults({
     );
     //allow the file to be streamed to a remote location after it is written (ex. streamOutputToMqtt, streamOutputToGeoServer).
     ogf2.shouldStream = true;
-    let osf1 = prom.addOutputSummaryFileToScenario(scen1, "best_fit/summary.txt");
+    let osf1 = await prom.addOutputSummaryFileToScenario(scen1, "best_fit/summary.txt");
     osf1.outputs.outputApplication = true;
     osf1.outputs.outputFBP = true;
     osf1.outputs.outputFBPPatches = true;
@@ -205,8 +205,7 @@ modeller.client.JobManager.setDefaults({
     //test to see if all required parameters have been set
     if (prom.isValid()) {
         console.log("Model is valid...");
-        console.log("Inputs valid?...", prom.inputs.isValid())
-        console.log(prom.inputs.ignitions[0].feature);
+        console.log(prom.inputs.ignitions);
         //start the job asynchronously
         let wrapper = await prom.beginJobPromise();
         //trim the name of the newly started job
