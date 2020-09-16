@@ -69,7 +69,7 @@ modeller.client.JobManager.setDefaults({
     prom.setElevationFile("" + elevAttachment);
     //add the rest of the files as paths to locations on disk
     prom.setFuelmapFile(dogribData + "/fbp_fuel_type.asc");
-    prom.setLutFile(dogribData + "/fbp_lookup_table.lut");
+    prom.setLutFile(dogribData + "/fbp_lookup_table.csv");
     prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
     let degree_curing = prom.addGridFile(
         modeller.psaas.GridFileType.DEGREE_CURING,
@@ -276,7 +276,7 @@ modeller.client.JobManager.setDefaults({
     else {
         console.log('Model is NOT valid...')
         console.log('Inputs valid?...', prom.inputs.isValid())
-        prom.inputs.isValid()
+        console.log('Inputs', prom.inputs)
 
     }
 })().then((x) => console.log("Job created, waiting for results.", x));
