@@ -193,7 +193,7 @@ modeller.client.JobManager.setDefaults({
     scen1.setFwiOptions(false, true, false, false, false);
     scen1.addIgnitionReference(ig3);
     scen1.addIgnitionReference(ig4);
-    scen1.addIgnitionReference(polyign);
+    //scen1.addIgnitionReference(polyign);
     scen1.addWeatherStreamReference(b3Yaha);
     scen1.addFuelPatchReference(fuel_patch, 0);
     scen1.addGridFileReference(degree_curing, 1);
