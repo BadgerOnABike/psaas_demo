@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", {
 /** ignore this comment */
 const fs = require("fs");
 console.log("Launching demo...")
-const dogribData = '../Dogrib_dataset/'
+const dogribData = '../Dogrib_dataset'
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
