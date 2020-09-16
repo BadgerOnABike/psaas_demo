@@ -272,8 +272,7 @@ modeller.client.JobManager.setDefaults({
                 );
             }
         });
-    }
-    else {
+    } else {
         console.log('Model is NOT valid...')
         console.log('Inputs valid?...', prom.inputs.isValid())
         console.log('Inputs', prom.inputs)
