@@ -150,11 +150,11 @@ modeller.client.JobManager.setDefaults({
     //     dogribData + "/poly_ign.kmz",
     //     "This should be a polygon."
     // );
-    let lineign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        dogribData + "/line_fire.shp",
-        "This should be a line."
-    );
+    // let lineign = prom.addFileIgnition(
+    //     "2001-10-16T13:00:00",
+    //     dogribData + "/line_fire.shp",
+    //     "This should be a line."
+    // );
     //emit some statistics at the end of timesteps
     prom.timestepSettings.addStatistic(
         modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
