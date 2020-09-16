@@ -105,16 +105,16 @@ modeller.client.JobManager.setDefaults({
     let ig3 = prom.addPointIgnition("2001-10-16T13:00:00", ll1);
     let ll2 = new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
-    let polyign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        "../Dogrib_dataset/poly_ign.kmz",
-        "This should be a polygon."
-    );
-    let lineign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        "../Dogrib_dataset/line_fire.shp",
-        "This should be a line."
-    );
+    //let polyign = prom.addFileIgnition(
+    //  "2001-10-16T13:00:00",
+    //  "../Dogrib_dataset/poly_ign.kmz",
+    //  "This should be a polygon."
+    //);
+    //let lineign = prom.addFileIgnition(
+    //  "2001-10-16T13:00:00",
+    //  "../Dogrib_dataset/line_fire.shp",
+    //  "This should be a line."
+    //);
     //emit some statistics at the end of timesteps
     prom.timestepSettings.addStatistic(
         modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
@@ -204,7 +204,9 @@ modeller.client.JobManager.setDefaults({
     //prom.streamOutputToGeoServer("admin", "password", "192.168.0.178:8080/geoserver", "prometheus", "prometheus_store", "EPSG:4326");
     //test to see if all required parameters have been set
     if (prom.isValid()) {
-        console.log('Model is valid...')
+        console.log("Model is valid...");
+        console.log("Inputs valid?...", prom.inputs.isValid())
+        console.log(prom.inputs.ignitions[0].feature);
         //start the job asynchronously
         let wrapper = await prom.beginJobPromise();
         //trim the name of the newly started job
@@ -233,11 +235,10 @@ modeller.client.JobManager.setDefaults({
             }
         });
     } else {
-        console.log('Model is NOT valid...')
-        console.log('Inputs valid?...', prom.inputs.isValid())
-        console.log(prom.inputs)
-        prom.inputs.isValid()
-
+        console.log("Model is NOT valid...");
+        console.log("Inputs valid?...", prom.inputs.isValid());
+        console.log(prom.inputs);
+        prom.inputs.isValid();
     }
 })().then((x) => console.log("Job created, waiting for results."));
 //# sourceMappingURL=example_job.js.map
