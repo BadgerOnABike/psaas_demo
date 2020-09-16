@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", {
 /** ignore this comment */
 const fs = require("fs");
 console.log("Launching demo...")
-const dogribData = '../Dogrib_dataset/'
+const dogribData = '../Dogrib_dataset'
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
@@ -69,7 +69,7 @@ modeller.client.JobManager.setDefaults({
     prom.setElevationFile("" + elevAttachment);
     //add the rest of the files as paths to locations on disk
     prom.setFuelmapFile(dogribData + "/fbp_fuel_type.asc");
-    prom.setLutFile(dogribData + "/fbp_lookup_table.lut");
+    prom.setLutFile(dogribData + "/fbp_lookup_table.csv");
     prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
     let degree_curing = prom.addGridFile(
         modeller.psaas.GridFileType.DEGREE_CURING,
@@ -145,11 +145,11 @@ modeller.client.JobManager.setDefaults({
         -115.4086430000001
     );
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
-    let polyign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        dogribData + "/poly_ign.kmz",
-        "This should be a polygon."
-    );
+    // let polyign = prom.addFileIgnition(
+    //     "2001-10-16T13:00:00",
+    //     dogribData + "/poly_ign.kmz",
+    //     "This should be a polygon."
+    // );
     let lineign = prom.addFileIgnition(
         "2001-10-16T13:00:00",
         dogribData + "/line_fire.shp",
@@ -193,7 +193,7 @@ modeller.client.JobManager.setDefaults({
     scen1.setFwiOptions(false, true, false, false, false);
     scen1.addIgnitionReference(ig3);
     scen1.addIgnitionReference(ig4);
-    scen1.addIgnitionReference(polyign);
+    //scen1.addIgnitionReference(polyign);
     scen1.addWeatherStreamReference(b3Yaha);
     scen1.addFuelPatchReference(fuel_patch, 0);
     scen1.addGridFileReference(degree_curing, 1);
@@ -275,8 +275,7 @@ modeller.client.JobManager.setDefaults({
     } else {
         console.log('Model is NOT valid...')
         console.log('Inputs valid?...', prom.inputs.isValid())
-        console.log(prom.inputs)
-        prom.inputs.isValid()
+        console.log('Inputs', prom.inputs)
 
     }
 })().then((x) => console.log("Job created, waiting for results.", x));
