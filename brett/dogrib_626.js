@@ -105,16 +105,16 @@ modeller.client.JobManager.setDefaults({
     let ig3 = prom.addPointIgnition("2001-10-16T13:00:00", ll1);
     let ll2 = new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
     let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
-    let polyign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        "../Dogrib_dataset/poly_ign.kmz",
-        "This should be a polygon."
-    );
-    let lineign = prom.addFileIgnition(
-        "2001-10-16T13:00:00",
-        "../Dogrib_dataset/line_fire.shp",
-        "This should be a line."
-    );
+    //let polyign = prom.addFileIgnition(
+    //    "2001-10-16T13:00:00",
+    //    "../Dogrib_dataset/poly_ign.kmz",
+    //    "This should be a polygon."
+    //);
+    //let lineign = prom.addFileIgnition(
+    //    "2001-10-16T13:00:00",
+    //    "../Dogrib_dataset/line_fire.shp",
+    //    "This should be a line."
+    //);
     //emit some statistics at the end of timesteps
     prom.timestepSettings.addStatistic(
         modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
@@ -153,7 +153,7 @@ modeller.client.JobManager.setDefaults({
     scen1.setFwiOptions(false, true, false, false, false);
     scen1.addIgnitionReference(ig3);
     scen1.addIgnitionReference(ig4);
-    scen1.addIgnitionReference(polyign);
+    //scen1.addIgnitionReference(polyign);
     scen1.addWeatherStreamReference(b3Yaha);
     scen1.addFuelPatchReference(fuel_patch, 0);
     scen1.addGridFileReference(degree_curing, 1);
