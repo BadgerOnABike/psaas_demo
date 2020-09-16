@@ -275,6 +275,9 @@ modeller.client.JobManager.setDefaults({
     }
     else {
         console.log('Model is NOT valid...')
+        console.log('Inputs valid?...', prom.inputs.isValid())
+        prom.inputs.isValid()
+
     }
-})().then((x) => console.log("Job created, waiting for results."));
+})().then((x) => console.log("Job created, waiting for results.", x));
 //# sourceMappingURL=example_job.js.map
