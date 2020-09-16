@@ -244,6 +244,7 @@ modeller.client.JobManager.setDefaults({
     //prom.streamOutputToGeoServer("admin", "password", "192.168.0.178:8080/geoserver", "prometheus", "prometheus_store", "EPSG:4326");
     //test to see if all required parameters have been set
     if (prom.isValid()) {
+        console.log('Model is valid...')
         //start the job asynchronously
         let wrapper = await prom.beginJobPromise();
         //trim the name of the newly started job
@@ -271,6 +272,9 @@ modeller.client.JobManager.setDefaults({
                 );
             }
         });
+    }
+    else {
+        console.log('Model is NOT valid...')
     }
 })().then((x) => console.log("Job created, waiting for results."));
 //# sourceMappingURL=example_job.js.map
