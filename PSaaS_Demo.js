@@ -27,7 +27,7 @@ modeller.client.JobManager.setDefaults({
   password: serverConfig.mqttPassword,
 });
 //the directory of the test files
-let localDir = "./";
+let localDir = __dirname + "/";
 //let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
 //make sure the local directory has been configured
 if (localDir.includes("@JOBS@")) {
