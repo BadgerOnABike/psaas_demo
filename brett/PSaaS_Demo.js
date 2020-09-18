@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 /** ignore this comment */
 const fs = require("fs");
+const path = require("path");
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
@@ -27,7 +28,8 @@ modeller.client.JobManager.setDefaults({
   password: serverConfig.mqttPassword,
 });
 //the directory of the test files
-let localDir = __dirname;
+//make sure the path ends in a trailing slash
+let localDir = path.join(__dirname, '../');
 //let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
 //make sure the local directory has been configured
 if (localDir.includes("@JOBS@")) {
@@ -197,7 +199,7 @@ if (localDir.includes("@JOBS@")) {
     modeller.psaas.Output_GridFileInterpolation.IDW,
     scen1
   );
-  ogf1.stream;
+  ogf1.shouldStream = true;
   let ogf2 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.BURN_GRID,
     "best_fit/burn_grid.tif",
@@ -207,7 +209,6 @@ if (localDir.includes("@JOBS@")) {
   );
   //allow the file to be streamed to a remote location after it is written (ex. streamOutputToMqtt, streamOutputToGeoServer).
   ogf2.shouldStream = true;
-  ogf2.stream;
   let osf1 = prom.addOutputSummaryFileToScenario(scen1, "best_fit/summary.txt");
   osf1.outputs.outputApplication = true;
   osf1.outputs.outputFBP = true;
