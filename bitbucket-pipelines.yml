@@ -11,6 +11,6 @@ pipelines:
   default:
     - step:
         script:
-          - git push --mirror git@github.com:HnyBajr/psaas_demo.git
+          - git push --mirror git@github.com:BadgerOnABike/psaas_demo.git
           
           
