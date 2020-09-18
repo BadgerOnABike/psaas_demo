@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 /** ignore this comment */
 const fs = require("fs");
+const path = require("path");
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
@@ -27,7 +28,8 @@ modeller.client.JobManager.setDefaults({
   password: serverConfig.mqttPassword,
 });
 //the directory of the test files
-let localDir = __dirname;
+//make sure the path ends in a trailing slash
+let localDir = path.join(__dirname, '../');
 //let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
 //make sure the local directory has been configured
 if (localDir.includes("@JOBS@")) {
