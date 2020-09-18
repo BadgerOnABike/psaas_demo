@@ -29,7 +29,7 @@ modeller.client.JobManager.setDefaults({
 });
 //the directory of the test files
 //make sure the path ends in a trailing slash
-let localDir = path.join(__dirname, '../');
+let localDir = path.join(__dirname, "../");
 //let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
 //make sure the local directory has been configured
 if (localDir.includes("@JOBS@")) {
@@ -115,7 +115,7 @@ if (localDir.includes("@JOBS@")) {
   wpatch.setWindDirOperation(modeller.psaas.WeatherPatchOperation.PLUS, 10);
   wpatch.setRhOperation(modeller.psaas.WeatherPatchOperation.PLUS, 5);
   let wpatch2 = prom.addFileWeatherPatch(
-    localDir + "Dogrib_dataset/weather_patch_wd270.kmz",
+    localDir + "Dogrib_dataset/weather_patch_wd270.kml",
     "2001-10-16T13:00:00",
     "13:00:00",
     "2001-10-16T21:00:00",
@@ -177,10 +177,10 @@ if (localDir.includes("@JOBS@")) {
   scen1.addIgnitionReference(ig4);
   //scen1.addIgnitionReference(polyign);
   scen1.addWeatherStreamReference(b3Yaha);
+  scen1.addWeatherPatchReference(wpatch2, 3);
   scen1.addFuelPatchReference(fuel_patch, 0);
   scen1.addGridFileReference(degree_curing, 1);
-  scen1.addWeatherPatchReference(wpatch, 3);
-  scen1.addWeatherPatchReference(wpatch2, 2);
+  scen1.addWeatherPatchReference(wpatch, 2);
   let ovf1 = prom.addOutputVectorFileToScenario(
     modeller.psaas.VectorFileType.KML,
     "best_fit/perim.kml",
