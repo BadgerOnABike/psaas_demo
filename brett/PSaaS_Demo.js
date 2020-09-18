@@ -224,8 +224,6 @@ if (localDir.includes("@JOBS@")) {
   //stream output files to the MQTT connection
   //prom.streamOutputToMqtt();
   //stream output files to a GeoServer instance
-  //prom.streamOutputToGeoServer("admin", "password", "192.168.0.178:8080/geoserver", "prometheus", "prometheus_store", "EPSG:4326");
-  //test to see if all required parameters have been set
   if (prom.isValid()) {
     //start the job asynchronously
     let wrapper = await prom.beginJobPromise();
