@@ -1,29 +1,22 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Yup this is a readme.
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Demo PSaaS out of the box
+
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Clone the repo
+* cd into the repo
+* do npm i
+* edit config.json
+* run: node demo.js
+* when it breaks, call and cry to your mommy.
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Ha ha ha
