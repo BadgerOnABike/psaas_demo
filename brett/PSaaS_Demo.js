@@ -197,7 +197,7 @@ if (localDir.includes("@JOBS@")) {
     modeller.psaas.Output_GridFileInterpolation.IDW,
     scen1
   );
-  ogf1.stream;
+  ogf1.shouldStream = true;
   let ogf2 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.BURN_GRID,
     "best_fit/burn_grid.tif",
@@ -207,7 +207,6 @@ if (localDir.includes("@JOBS@")) {
   );
   //allow the file to be streamed to a remote location after it is written (ex. streamOutputToMqtt, streamOutputToGeoServer).
   ogf2.shouldStream = true;
-  ogf2.stream;
   let osf1 = prom.addOutputSummaryFileToScenario(scen1, "best_fit/summary.txt");
   osf1.outputs.outputApplication = true;
   osf1.outputs.outputFBP = true;
