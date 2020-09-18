@@ -175,10 +175,10 @@ modeller.client.JobManager.setDefaults({
     "2001-10-16T22:00:00",
     scen1
   );
-  //ovf1.mergeContact = true;
-  //ovf1.multPerim = true;
-  //ovf1.removeIslands = true;
-  //ovf1.metadata = jDefaults.metadataDefaults;
+  ovf1.mergeContact = true;
+  ovf1.multPerim = true;
+  ovf1.removeIslands = true;
+  ovf1.metadata = jDefaults.metadataDefaults;
   let ogf1 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.TEMPERATURE,
     "best_fit/temp.txt",
