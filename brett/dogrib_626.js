@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 /** ignore this comment */
 const fs = require("fs");
+const path = require("path");
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
@@ -26,6 +27,9 @@ modeller.client.JobManager.setDefaults({
   username: serverConfig.mqttUsername,
   password: serverConfig.mqttPassword,
 });
+//the directory of the test files
+//make sure the path ends in a trailing slash
+let localDir = path.join(__dirname, '../');
 //an asynchronous function for creating a job and listening for status messages.
 (async function () {
   //fetch the default settings for some parameters from PSaaS Builder
@@ -34,8 +38,8 @@ modeller.client.JobManager.setDefaults({
   //set this to the location of the test files folder.
   let prom = new modeller.psaas.PSaaS();
   //add the projection and elevation files as attachments
-  let projContents = fs.readFileSync("../Dogrib_dataset/elevation.prj", "utf8");
-  let elevContents = fs.readFileSync("../Dogrib_dataset/elevation.asc", "utf8");
+  let projContents = fs.readFileSync(localDir + "Dogrib_dataset/elevation.prj", "utf8");
+  let elevContents = fs.readFileSync(localDir + "Dogrib_dataset/elevation.asc", "utf8");
   let projAttachment = prom.addAttachment("elevation.prj", projContents);
   let elevAttachment = prom.addAttachment("elevation.asc", elevContents);
   if (!projAttachment || !elevAttachment) {
@@ -44,36 +48,36 @@ modeller.client.JobManager.setDefaults({
   prom.setProjectionFile("" + projAttachment);
   prom.setElevationFile("" + elevAttachment);
   //add the rest of the files as paths to locations on disk
-  prom.setFuelmapFile("../Dogrib_dataset/fbp_fuel_type.asc");
-  prom.setLutFile("../Dogrib_dataset/fbp_lookup_table.csv");
+  prom.setFuelmapFile(localDir + "Dogrib_dataset/fbp_fuel_type.asc");
+  prom.setLutFile(localDir + "Dogrib_dataset/fbp_lookup_table.csv");
   prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
   let degree_curing = prom.addGridFile(
     modeller.psaas.GridFileType.DEGREE_CURING,
-    "../Dogrib_dataset/degree_of_curing.asc",
-    "../Dogrib_dataset/degree_of_curing.prj"
+    localDir + "Dogrib_dataset/degree_of_curing.asc",
+    localDir + "Dogrib_dataset/degree_of_curing.prj"
   );
   let fuel_patch = prom.addLandscapeFuelPatch(
     "O-1a Matted Grass",
     "O-1b Standing Grass"
   );
   let gravel_road = prom.addFileFuelBreak(
-    "../Dogrib_dataset/access_gravel_road.kmz"
+    localDir + "Dogrib_dataset/access_gravel_road.kmz"
   );
   gravel_road.setName("Gravel Road");
   let unimproved_road = prom.addFileFuelBreak(
-    "../Dogrib_dataset/access_unimproved_road.kmz"
+    localDir + "Dogrib_dataset/access_unimproved_road.kmz"
   );
   unimproved_road.setName("Unimproved Road");
-  let river = prom.addFileFuelBreak("../Dogrib_dataset/hydrology_river.kmz");
+  let river = prom.addFileFuelBreak(localDir + "Dogrib_dataset/hydrology_river.kmz");
   river.setName("Rivers");
-  let stream = prom.addFileFuelBreak("../Dogrib_dataset/hydrology_stream.kmz");
+  let stream = prom.addFileFuelBreak(localDir + "Dogrib_dataset/hydrology_stream.kmz");
   stream.setName("Streams");
   let ws = prom.addWeatherStation(
     1483.0,
     new modeller.globals.LatLon(51.6547, -115.3617)
   );
   let b3Yaha = ws.addWeatherStream(
-    "../Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
+    localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
     94.0,
     17,
     modeller.psaas.HFFMCMethod.LAWSON,
@@ -93,7 +97,7 @@ modeller.client.JobManager.setDefaults({
   wpatch.setWindDirOperation(modeller.psaas.WeatherPatchOperation.PLUS, 10);
   wpatch.setRhOperation(modeller.psaas.WeatherPatchOperation.PLUS, 5);
   let wpatch2 = prom.addFileWeatherPatch(
-    "../Dogrib_dataset/weather_patch_wd270.kmz",
+    localDir + "Dogrib_dataset/weather_patch_wd270.kmz",
     "2001-10-16T13:00:00",
     "13:00:00",
     "2001-10-16T21:00:00",
@@ -113,12 +117,12 @@ modeller.client.JobManager.setDefaults({
   let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
   //let polyign = prom.addFileIgnition(
   //  "2001-10-16T13:00:00",
-  //  "../Dogrib_dataset/poly_ign.kmz",
+  //  localDir + "Dogrib_dataset/poly_ign.kmz",
   //  "This should be a polygon."
   //);
   //let lineign = prom.addFileIgnition(
   //  "2001-10-16T13:00:00",
-  //  "../Dogrib_dataset/line_fire.shp",
+  //  localDir + "Dogrib_dataset/line_fire.shp",
   //  "This should be a line."
   //);
   //emit some statistics at the end of timesteps
