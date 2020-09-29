@@ -273,6 +273,7 @@ let localDir = path.join(__dirname, '../');
     vectorKML.mergeContact = true;
     vectorKML.multPerim = true;
     vectorKML.removeIslands = true;
+    vectorKML.shouldStream = true;
     vectorKML.metadata = jDefaults.metadataDefaults;
 
     // Create and add a raster temperature output 
