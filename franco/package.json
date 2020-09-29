@@ -8,6 +8,7 @@
   },
   "author": "",
   "dependencies": {
+    "dotenv": "8.2.0",
     "psaas-js-api": "bitbucket:psaasredapp/psaas-js-api"
   },
   "license": "ISC"
