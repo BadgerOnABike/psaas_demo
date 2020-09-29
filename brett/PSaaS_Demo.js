@@ -108,18 +108,18 @@ if (localDir.includes("@JOBS@")) {
     "2001-10-30"
   );
 
-  let b3Yaha2 = ws.addWeatherStream(
-    localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
-    94.0,
-    17,
-    modeller.psaas.HFFMCMethod.LAWSON,
-    89.0,
-    58.0,
-    482.0,
-    0.0,
-    "2001-09-25",
-    "2001-10-30"
-  );
+  //let b3Yaha2 = ws.addWeatherStream(
+  //  localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
+  //  94.0,
+  //  17,
+  //  modeller.psaas.HFFMCMethod.LAWSON,
+  //  89.0,
+  //  58.0,
+  //  482.0,
+  //  0.0,
+  //  "2001-09-25",
+  //  "2001-10-30"
+  //);
 
   let wpatch = prom.addLandscapeWeatherPatch(
     "2001-10-16T13:00:00",
@@ -192,7 +192,7 @@ if (localDir.includes("@JOBS@")) {
   scen1.addIgnitionReference(ig4);
   //scen1.addIgnitionReference(polyign);
   scen1.addWeatherStreamReference(b3Yaha);
-  scen1.addWeatherStreamReference(b3Yaha2);
+  //scen1.addWeatherStreamReference(b3Yaha2);
   scen1.addWeatherPatchReference(wpatch2, 3);
   scen1.addFuelPatchReference(fuel_patch, 0);
   scen1.addGridFileReference(degree_curing, 1);
