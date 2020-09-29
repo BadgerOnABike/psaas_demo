@@ -11,11 +11,11 @@ const fs = require("fs");
 const path = require("path");
 
 // load config from environment
-require('dotenv').config()
+//require('dotenv').config()
 
 // use ENV stuff to avoid exposing credentials in repos. 
-const geoserverUser = process.env.GEOSERVER_USER
-const geoserverPass = process.env.GEOSERVER_PASS
+//const geoserverUser = process.env.GEOSERVER_USER
+//const geoserverPass = process.env.GEOSERVER_PASS
 
 // this line actually loads the PSaaS Javascript API.
 const modeller = require("psaas-js-api");
