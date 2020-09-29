@@ -265,7 +265,7 @@ let localDir = path.join(__dirname, '../');
         modeller.psaas.VectorFileType.KML,
         "best_fit/perim.kml",
         "2001-10-16T13:00:00",
-        "2001-10-16T14:00:00",
+        "2001-10-16T22:00:00",
         scen1
     );
 
@@ -273,7 +273,7 @@ let localDir = path.join(__dirname, '../');
     vectorKML.mergeContact = true;
     vectorKML.multPerim = true;
     vectorKML.removeIslands = true;
-    vectorKML.shouldStream = true;
+    // vectorKML.shouldStream = true;
     vectorKML.metadata = jDefaults.metadataDefaults;
 
     // Create and add a raster temperature output 
@@ -296,7 +296,7 @@ let localDir = path.join(__dirname, '../');
 
     //allow the file to be streamed to a remote location after it is written 
     // (ex. streamOutputToMqtt, streamOutputToGeoServer).
-    rasterBurn.shouldStream = true;
+    // rasterBurn.shouldStream = true;
 
     // Create and add a summary textfile output 
     let modelSummary = psaasModel.addOutputSummaryFileToScenario(scen1, "best_fit/summary.txt");
@@ -315,7 +315,7 @@ let localDir = path.join(__dirname, '../');
     //stream output files to the MQTT connection
     //psaasModel.streamOutputToMqtt();
     //stream output files to a GeoServer instance
-    psaasModel.streamOutputToGeoServer(geoserverUser, geoserverPass, "geowh.vm.sparcsonline.com/geoserver", "psaastests", "psaastest_store", "EPSG:4326");
+    //  psaasModel.streamOutputToGeoServer(geoserverUser, geoserverPass, "geowh.vm.sparcsonline.com/geoserver", "psaastests", "psaastest_store", "EPSG:4326");
 
     //test to see if all required parameters have been set
     // this logic is conditional if the model is valid.
