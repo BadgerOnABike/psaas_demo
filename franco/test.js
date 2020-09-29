@@ -10,6 +10,13 @@ Object.defineProperty(exports, "__esModule", {
 const fs = require("fs");
 const path = require("path");
 
+// load config from environment
+require('dotenv').config()
+
+// use ENV stuff. 
+const geoserverUser = process.env.GEOSERVER_USER
+const geoserverPass = process.env.GEOSERVER_PASS
+
 // this line actually loads the PSaaS Javascript API.
 const modeller = require("psaas-js-api");
 
@@ -307,7 +314,7 @@ let localDir = path.join(__dirname, '../');
     //stream output files to the MQTT connection
     //psaasModel.streamOutputToMqtt();
     //stream output files to a GeoServer instance
-    //psaasModel.streamOutputToGeoServer("admin", "password", "192.168.0.178:8080/geoserver", "prometheus", "prometheus_store", "EPSG:4326");
+    psaasModel.streamOutputToGeoServer(geoserverUser, geoserverPass, "geowh.vm.sparcsonline.com/geoserver", "psaastests", "psaastest_store", "EPSG:4326");
 
     //test to see if all required parameters have been set
     // this logic is conditional if the model is valid.
