@@ -64,7 +64,7 @@ if (localDir.includes("@JOBS@")) {
   //add the rest of the files as paths to locations on disk
   prom.setFuelmapFile(localDir + "Dogrib_dataset/fbp_fuel_type.asc");
   prom.setLutFile(localDir + "Dogrib_dataset/fbp_lookup_table.csv");
-  prom.setTimezoneByValue(25); //hard coded to CDT, see example_timezone.js for an example getting the IDs
+  prom.setTimezoneByValue(18); //hard coded to CDT, see example_timezone.js for an example getting the IDs
   let degree_curing = prom.addGridFile(
     modeller.psaas.GridFileType.DEGREE_CURING,
     localDir + "Dogrib_dataset/degree_of_curing.asc",
@@ -94,6 +94,7 @@ if (localDir.includes("@JOBS@")) {
     1483.0,
     new modeller.globals.LatLon(51.6547, -115.3617)
   );
+
   let b3Yaha = ws.addWeatherStream(
     localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
     94.0,
@@ -106,6 +107,20 @@ if (localDir.includes("@JOBS@")) {
     "2001-09-25",
     "2001-10-30"
   );
+
+  let b3Yaha2 = ws.addWeatherStream(
+    localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
+    94.0,
+    17,
+    modeller.psaas.HFFMCMethod.LAWSON,
+    89.0,
+    58.0,
+    482.0,
+    0.0,
+    "2001-09-25",
+    "2001-10-30"
+  );
+
   let wpatch = prom.addLandscapeWeatherPatch(
     "2001-10-16T13:00:00",
     "13:00:00",
@@ -177,6 +192,7 @@ if (localDir.includes("@JOBS@")) {
   scen1.addIgnitionReference(ig4);
   //scen1.addIgnitionReference(polyign);
   scen1.addWeatherStreamReference(b3Yaha);
+  scen1.addWeatherStreamReference(b3Yaha2);
   scen1.addWeatherPatchReference(wpatch2, 3);
   scen1.addFuelPatchReference(fuel_patch, 0);
   scen1.addGridFileReference(degree_curing, 1);
@@ -192,14 +208,15 @@ if (localDir.includes("@JOBS@")) {
   ovf1.multPerim = true;
   ovf1.removeIslands = true;
   ovf1.metadata = jDefaults.metadataDefaults;
-  let ogf1 = await prom.addOutputGridFileToScenario(
+  let ogf1 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.TEMPERATURE,
     "best_fit/temp.txt",
-    "2001-10-16T21:00:00",
+    "2001-10-16T22:00:00",
     modeller.psaas.Output_GridFileInterpolation.IDW,
     scen1
   );
   ogf1.shouldStream = true;
+  console.log(ogf1);
   let ogf2 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.BURN_GRID,
     "best_fit/burn_grid.tif",
@@ -224,6 +241,7 @@ if (localDir.includes("@JOBS@")) {
   //stream output files to the MQTT connection
   //prom.streamOutputToMqtt();
   //stream output files to a GeoServer instance
+  //prom.streamOutputToGeoServer();
   if (prom.isValid()) {
     //start the job asynchronously
     let wrapper = await prom.beginJobPromise();
