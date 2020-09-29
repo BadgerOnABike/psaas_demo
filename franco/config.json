@@ -1,0 +1,28 @@
+{
+  "log": {
+    "filename": "logfile.log",
+    "verbosity": 2
+  },
+  "signals": {
+    "start": "start.txt",
+    "complete": "complete.txt"
+  },
+  "hardware": {
+    "processes": 8,
+    "cores": 4
+  },
+  "mqtt": {
+    "hostname": "emqx.vm.sparcsonline.com",
+    "port": 1883,
+    "topic": "psaas",
+    "verbosity": 3,
+    "qos": 1,
+    "username": "psaasuser",
+    "password": "psaaspass"
+  },
+  "builder": {
+    "hostname": "192.168.80.129",
+    "port": 32479
+  },
+  "exampleDirectory": "C:\\jobs"
+}

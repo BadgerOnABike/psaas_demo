@@ -12,8 +12,10 @@ const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 //initialize the connection settings for PSaaS_Builder
 modeller.globals.SocketHelper.initialize(
-    serverConfig.builderAddress,
-    serverConfig.builderPort
+    //serverConfig.builderAddress,
+    '192.168.80.129',
+    //serverConfig.builderPort
+    32479
 );
 //turn on debug messages
 modeller.globals.PSaaSLogger.getInstance().setLogLevel(
@@ -21,11 +23,16 @@ modeller.globals.PSaaSLogger.getInstance().setLogLevel(
 );
 //set the default MQTT broker to use when listening for PSaaS events
 modeller.client.JobManager.setDefaults({
-    host: serverConfig.mqttAddress,
-    port: serverConfig.mqttPort,
-    topic: serverConfig.mqttTopic,
-    username: serverConfig.mqttUsername,
-    password: serverConfig.mqttPassword,
+    // host: serverConfig.mqttAddress,
+    host: "emqx.vm.sparcsonline.com",
+    //port: serverConfig.mqttPort,
+    port: 1883,
+    // topic: serverConfig.mqttTopic,
+    topic: "psaas",
+    //username: serverConfig.mqttUsername,
+    username: "psaasuser",
+    //password: serverConfig.mqttPassword,
+    password: "psaaspass"
 });
 //the directory of the test files
 //make sure the path ends in a trailing slash
