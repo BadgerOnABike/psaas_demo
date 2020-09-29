@@ -6,14 +6,14 @@ Object.defineProperty(exports, "__esModule", {
     value: true,
 });
 
-//** load model dependancies */
+//** load model dependencies */
 const fs = require("fs");
 const path = require("path");
 
 // load config from environment
 require('dotenv').config()
 
-// use ENV stuff. 
+// use ENV stuff to avoid exposing credentials in repos. 
 const geoserverUser = process.env.GEOSERVER_USER
 const geoserverPass = process.env.GEOSERVER_PASS
 
