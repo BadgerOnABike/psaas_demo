@@ -9,6 +9,7 @@
   "author": "",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "npm-conf": "^1.1.3",
     "psaas-js-api": "bitbucket:psaasredapp/psaas-js-api"
   },
   "license": "ISC"
