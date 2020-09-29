@@ -265,7 +265,7 @@ let localDir = path.join(__dirname, '../');
         modeller.psaas.VectorFileType.KML,
         "best_fit/perim.kml",
         "2001-10-16T13:00:00",
-        "2001-10-16T22:00:00",
+        "2001-10-16T14:00:00",
         scen1
     );
 
