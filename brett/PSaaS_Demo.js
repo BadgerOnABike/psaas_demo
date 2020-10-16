@@ -10,6 +10,7 @@ const fs = require("fs");
 const path = require("path");
 const modeller = require("psaas-js-api");
 let serverConfig = new modeller.defaults.ServerConfiguration();
+
 //initialize the connection settings for PSaaS_Builder
 modeller.globals.SocketHelper.initialize(
   serverConfig.builderAddress,
