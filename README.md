@@ -2,7 +2,7 @@
 
 Prometheus Software as a Service (PSaaS) is an implementation of Prometheus: The Canadian Wildfire Simulation Growth Model. Details on this software can be found [here][firegrowthmodel.ca]. The purpose of PSaaS is to replace the current single computer system with a distributable platform agnostic modelling tool.
 
-### Repository Intest
+### Repository Intent
 
 The goal of the repository is to provide a functional example of PSaaS operating with the JavaScript API. The demo focuses on the Dogrib area as a unit test to compare with previous testing. Additionally we intend to show off all possible functionality of the tool within this series of scripts.
 
