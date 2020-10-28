@@ -4,11 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PSaaS Demo UI</title>
+
+    <!-- Setup our modal windows -->
+    <script src="libs/micromodal/micromodal.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+
+    <style>
+        .modal {
+            display: none;
+        }
+
+        .modal.is-open {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
     <h1>PSaaS Demo UI</h1>
+    <div id="testing-area">
+
+    </div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                    <h2 class="modal__title">
+                        Modal Title
+                    </h2>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <div class="modal-content-content">
+                    <div class="modal__content">
+
+                        <div id='modal-left'>
+                            <div style="width: 60%; float:left">
+                                <div id='app-config'>
+                                    this is #app-config div
+                                </div>
+                                <div id='app-editor'>
+                                    this is #app-editor div
+                                </div>
+                            </div>
+
+                            <div style="width: 40%; float:right">
+
+                                <div id="app-other">
+                                    this is #app-other div
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <footer class="modal__footer">
+                        <button id="modal-1-close" class="modal__btn" data-micromodal-close
+                            aria-label="Close this dialog window">Close</button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/basicui.js"></script>
 </body>
 
 </html>

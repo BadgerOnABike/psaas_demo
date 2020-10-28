@@ -1,0 +1,644 @@
+body {
+  background-color: rgba(15, 7, 7, 0.786);
+  color: rgb(191, 186, 165);
+  text-size-adjust: 2.8;
+}
+
+h1, h2, h3, h4 {
+  text-shadow: 2px 2px 8px #222;
+}
+
+body, input, select, button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 100%;
+}
+
+button:not(.modal__close) {
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px 0px #222;
+  background: rgb(43, 42, 37);
+  text-shadow: 1px 1px 2px #000000;
+  color: orange;
+  /* margin-right:10px; */
+}
+
+button:hover {
+  color: #000;
+  /* text-shadow: 1px 1px 2px #fff; */
+}
+
+#app-header {
+  padding: 0px;
+  border-radius: 4px;
+  background-color: rgba(255, 248, 220, 0.073);
+  display: flex;
+  /* or inline-flex */
+  justify-content: center
+}
+
+#app-logo {
+  display: inline-block;
+  -webkit-filter: drop-shadow(2px 2px 8px #222);
+  filter: drop-shadow(2px 2px 8px #222);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#app-title {
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 33px;
+  display: flex;
+  /* or inline-flex */
+  justify-content: center
+}
+
+#app-footer-logo {
+  display: inline-block;
+  -webkit-filter: drop-shadow(2px 2px 8px #222);
+  filter: drop-shadow(2px 2px 8px #222);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* #start-map-button{
+    color: yellow;
+} */
+
+#app-footer-copyright {
+  text-shadow: 2px 2px 8px #222;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+a {
+  color: rgb(249, 112, 0);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(152, 71, 4);
+}
+
+a:active {
+  background-color: black;
+}
+
+a:visited {
+  background-color: rgb(249, 112, 0);
+}
+
+#app-button-bar {
+  display: flex;
+  /* or inline-flex */
+  justify-content: center
+}
+
+.map-button-div {
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px #555;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+
+button svg {
+  -webkit-filter: drop-shadow(1px 1px 2px #000);
+  filter: drop-shadow(1px 1px 2px #000);
+  /* Similar syntax to box-shadow */
+}
+
+.hover-button {
+  color: #000;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+.active-button {
+  color: #ff0;
+}
+
+.app-overlay {
+  background-color: rgba(245, 222, 179, 0.539);
+  display: none;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+body {
+  padding: 10;
+  margin: 10;
+}
+
+/* html, body, #map-div {
+    height: 100%;
+    width: 100vw;
+    
+} */
+
+#map-div {
+  /* display:none;  */
+  /* width: 100%; */
+  height: 70vh;
+  border-radius: 8px;
+  box-shadow: inset 1px 1px 10px #000;
+}
+
+.button-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-list button {
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+#app-button-bar button {
+  margin-right: 10px;
+}
+
+/** for html reports */
+
+#weather-report-display {
+  background-color: white;
+  color: #222;
+}
+
+.views-field {
+  width: 50px;
+}
+
+table, tr, td, thead, tbody {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-width: 0;
+}
+
+.cc>thead th {
+  border-collapse: collapse !important;
+  border-color: #fff;
+  color: #494949;
+  font-weight: 700;
+}
+
+.views-field-obs-station-handle {
+  width: 280px;
+}
+
+.views-obs-title {
+  width: 280px;
+}
+
+.views-field-obs-temperature {
+  width: 80px;
+}
+
+.cc>table {
+  border-spacing: 0;
+  border-color: #eee;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.centered-cell {
+  text-align: center;
+}
+
+.left-justified-cell {
+  text-align: left;
+}
+
+.right-justified-cell {
+  text-align: right;
+}
+
+.cc>tr.even, .cc>tr.odd {
+  background-color: #eee;
+  border-bottom: 1px solid #ccc;
+  padding: 0.1em 0.6em;
+}
+
+.cc>thead th {
+  border-bottom: 1px solid #eee;
+  color: #494949;
+  font-weight: 700;
+}
+
+td.fwi-low {
+  background-color: #0f0;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #0f0;
+}
+
+td.fwi-med {
+  background-color: #00f;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #00f;
+}
+
+td.fwi-hi {
+  background-color: #ff0;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ff0;
+}
+
+td.fwi-extreme {
+  background-color: #f00;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #f00;
+}
+
+.title-table {
+  vertical-align: top !important;
+  text-align: top !important;
+}
+
+tr.odd, tr.info {
+  background-color: rgb(255, 229, 202) !important;
+}
+
+@media print {
+  .logo-holder, #app-header, #app-button-bar, hr, h1, #reports-button-bar, #app-navbar, #app-footer {
+    display: none;
+  }
+  body, .app-overlay {
+    background-color: white;
+  }
+  #reports-display, main {
+    margin: 0 0 0 0;
+  }
+  #cc-report-button-bar {
+    display: none;
+  }
+}
+
+label {
+  display: block
+}
+
+button {
+  font-size: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid;
+  margin: 2px;
+  transition-duration: 0.4s;
+}
+
+button:hover:enabled {
+  border: 2px solid #4CAF50;
+  background-color: rgba(76, 175, 79, 0.313);
+}
+
+form, input {
+  font-size: 1.5rem;
+}
+
+*:disabled {
+  background-color: rgb(134, 132, 135);
+  color: black;
+}
+
+.station-bullet:hover {
+  font-weight: bold;
+}
+
+#sensor-wraper {
+  background-color: rgb(71, 71, 71);
+  display: inline-block;
+  text-align: center;
+  height: auto;
+  width: 100%
+}
+
+#sensor-templates {
+  background-color: rgb(211, 239, 211);
+  min-height: 200px;
+  height: auto;
+}
+
+#sensor-tokens {
+  background-color: skyblue;
+  height: 200%;
+}
+
+#sensor-trash {
+  background-color: red;
+  height: 200%;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#sensor-template-ul {
+  list-style: none;
+  padding: 0;
+}
+
+#sensor-tokens-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sensor-template {
+  display: block;
+  border-radius: 12px;
+  background: #73AD21;
+  color: #fff;
+  padding: 8px;
+  font-size: 1.2rem;
+  border: 1px solid;
+  list-style: none;
+  text-align: center;
+  margin: 5px;
+}
+
+.sensor-token {
+  display: block;
+  border-radius: 12px;
+  background: rgba(5, 10, 103, 0.635);
+  color: #fff;
+  padding: 8px;
+  font-size: 1.2rem;
+  border: 1px solid;
+  list-style: none;
+  text-align: center;
+  margin: 5px;
+}
+
+.save-button {
+  border: 2px solid rgb(201, 251, 0);
+  background-color: rgba(255, 0, 0, 0.313);
+}
+
+.destroy-button {
+  border: 2px solid rgb(201, 251, 0);
+  background-color: red;
+}
+
+#station-edit-div {
+  background-color: #494949;
+  border-radius: 12px;
+  color: bisque;
+  padding: 10px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.leaflet-control-layers-base label {
+  color: darkred;
+  padding: .4rem;
+}
+
+.leaflet-control-layers-overlays label {
+  color: blue;
+  padding: .4rem;
+}
+
+label {
+  color: orange;
+  padding: .4rem;
+}
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  input[type='text'], input[type='textarea'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+.station-edit-form input {
+  margin: 0 .25rem;
+  min-width: 125px;
+  border: 1px solid rgb(24, 13, 62);
+  border-left: 5px solid;
+  border-radius: 5px;
+  transition: border-color .5s ease-out;
+}
+
+.station-edit-form input:optional {
+  border-left-color: #999;
+}
+
+.station-edit-form input:required:valid {
+  border-left-color: palegreen;
+}
+
+.station-edit-form input:invalid {
+  border-left-color: salmon;
+  background-color: salmon;
+}
+
+.station-edit-form input:required:focus:valid {
+  background: url("/images/check.svg") no-repeat 95% 50%;
+  background-size: 25px;
+}
+
+.station-edit-form input:focus:invalid {
+  background: url("/images/tnt.svg") no-repeat 95% 50%;
+  background-size: 45px;
+}
+
+#station-stats-div {
+  border: 1px solid rgb(24, 13, 62);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.stats-error {
+  color: red;
+}
+
+/* The Modal (background) */
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+
+.modal-content {
+  color: #222;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 15px;
+  box-shadow: 10px 5px 5px black;
+}
+
+@media only screen and (max-height: 500px) {
+  #map-div {
+    height: 75vh;
+    /* MQ: 'Max500'; */
+  }
+}
+
+#stop-edit-station {
+  display: none;
+}
+
+.blood-red {
+  color: crimson;
+}
+
+.modal-prompt {
+  font-size: 200%;
+}
+
+#station-display ul {
+  padding: 0;
+  list-style: none;
+}
+
+.field-error {
+  background-color: pink;
+}
+
+.input-field:invalid {
+  background-color: pink;
+}
+
+.input-field:valid {
+  background-color: green;
+}
+
+/* Basic button styling */
+
+.cffdrs-active-button {
+  -webkit-animation: colorchange 1s infinite alternate;
+  animation: none;
+}
+
+/* Comment-out to have the button continue to pulse on mouseover */
+
+.cffdrs-active-button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+  /* background-color: #660000; */
+}
+
+/* Animation */
+
+@-webkit-keyframes colorchange {
+  0% {
+    color: #68d7e4;
+  }
+  100% {
+    color: white;
+  }
+}
+
+@keyframes colorchange {
+  0% {
+    color: #68d7e4;
+  }
+  100% {
+    color: white;
+  }
+}
+
+@-webkit-keyframes pulsing {
+  to {
+    box-shadow: 0 0 0 5px rgba(232, 76, 61, 0);
+  }
+}
+
+@-moz-keyframes pulsing {
+  to {
+    box-shadow: 0 0 0 5px rgba(232, 76, 61, 0);
+  }
+}
+
+@-ms-keyframes pulsing {
+  to {
+    box-shadow: 0 0 0 5px rgba(232, 76, 61, 0);
+  }
+}
+
+@keyframes pulsing {
+  to {
+    box-shadow: 0 0 0 5px rgba(232, 76, 61, 0);
+  }
+}
+
+#dashboard-tools {
+  text-align: right;
+}
+
+ul.user-edit-list {
+  list-style-type: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
