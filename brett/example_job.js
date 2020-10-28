@@ -4,6 +4,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 /** ignore this comment */
+const path = require("path");
 const fs = require("fs");
 const psaas_js_api_1 = require("psaas-js-api");
 let serverConfig = new psaas_js_api_1.defaults.ServerConfiguration();
@@ -20,7 +21,7 @@ psaas_js_api_1.client.JobManager.setDefaults({
     password: serverConfig.mqttPassword
 });
 //the directory of the test files
-let localDir = serverConfig.exampleDirectory;
+let localDir = path.join(__dirname, "../");
 let psaasVersion = '6.2.5.7';
 //make sure the local directory has been configured
 if (localDir.includes('@JOBS@')) {
