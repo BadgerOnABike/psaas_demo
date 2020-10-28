@@ -1,0 +1,8 @@
+{
+    "app-long-name": "PSaaS Demo Rest API",
+    "app-short-name": "PSaaS-REST",
+    "localDevHosts": [
+        "Francos-MacBook-Pro.local",
+        "Francos-MBP"
+    ]
+}

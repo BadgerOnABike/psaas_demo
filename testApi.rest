@@ -1,0 +1,5 @@
+@localApiServer = http://localhost:3000
+
+GET {{localApiServer}}/worlds HTTP/1.1
+###
+

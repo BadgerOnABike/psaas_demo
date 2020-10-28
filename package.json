@@ -1,21 +1,25 @@
 {
-  "name": "jsapi",
-  "version": "6.2.6",
+  "name": "psaas-demo",
+  "version": "1.0.0",
   "description": "PSaaS JS API",
   "main": "index.js",
+  "@std/esm": "cjs",
   "scripts": {
     "startnt": "node agencies/nt/nwt.js",
     "frontend": "node frontend.js",
-    "dev": "nodemon frontend.js"
+    "devFrontEnd": "nodemon frontend.js",
+    "devApi": "node -r @std/esm demoApiServer.mjs"
   },
   "author": "Heartland Software Solutions Inc.",
   "dependencies": {
+    "@std/esm": "^0.26.0",
     "@turf/turf": "^5.1.6",
     "clear": "^0.1.0",
     "csvtojson": "^2.0.8",
     "dateformat": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-openapi": "^7.0.2",
     "formidable": "^1.2.1",
     "geojson": "^0.5.0",
     "is-mobile": "^2.2.2",
