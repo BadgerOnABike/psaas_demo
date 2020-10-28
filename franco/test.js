@@ -6,18 +6,21 @@ Object.defineProperty(exports, "__esModule", {
     value: true,
 });
 
+
 //** load model dependencies */
 const fs = require("fs");
 const path = require("path");
 
 // load config from environment
-//require('dotenv').config()
+///require('dotenv').config()
 
 // use ENV stuff to avoid exposing credentials in repos. 
-//const geoserverUser = process.env.GEOSERVER_USER
+///const geoserverUser = process.env.GEOSERVER_USER
 //const geoserverPass = process.env.GEOSERVER_PASS
 
 // this line actually loads the PSaaS Javascript API.
+
+
 const modeller = require("psaas-js-api");
 
 // collect settings from defaults and server config.
@@ -27,9 +30,9 @@ let serverConfig = new modeller.defaults.ServerConfiguration();
 // Commented lines [inline] are how to manually override the server settings.
 modeller.globals.SocketHelper.initialize(
     serverConfig.builderAddress,
-    //'192.168.80.129',
+    // '192.168.80.129',
     serverConfig.builderPort
-    //32479
+    // 32479
 );
 
 // turn on debug messages using psaas logger
@@ -143,11 +146,12 @@ let localDir = path.join(__dirname, '../');
 
 
     // Add a weather station to the model, with elevation and lat lon.
-    let ws = psaasModel.addWeatherStation(
+    let myWeatherStation = psaasModel.addWeatherStation(
         1483.0,
         new modeller.globals.LatLon(51.6547, -115.3617)
     );
-    let b3Yaha = ws.addWeatherStream(
+
+    let b3Yaha = myWeatherStation.addWeatherStream(
         localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
         94.0,
         17,
@@ -176,6 +180,9 @@ let localDir = path.join(__dirname, '../');
     );
     wpatch2.setWindDirOperation(modeller.psaas.WeatherPatchOperation.EQUAL, 270);
     //create the ignition points
+
+
+
     let ll1 = await new modeller.globals.LatLon(
         51.65287648142513,
         -115.4779078053444
@@ -187,6 +194,7 @@ let localDir = path.join(__dirname, '../');
     );
     let ig4 = psaasModel.addPointIgnition("2001-10-16T16:00:00", ll2);
 
+    // Here we add statistics outputs.
     psaasModel.timestepSettings.addStatistic(
         modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
     );
@@ -225,6 +233,7 @@ let localDir = path.join(__dirname, '../');
         50.0
     );
     //optionally set dx, dy, and dt
+    // stochastic perturbation...
     scen1.setProbabilisticValues(
         1.0,
         1.0,
@@ -313,9 +322,9 @@ let localDir = path.join(__dirname, '../');
     modelSummary.outputs.outputWxStreams = true;
 
     //stream output files to the MQTT connection
-    //psaasModel.streamOutputToMqtt();
+    // psaasModel.streamOutputToMqtt();
     //stream output files to a GeoServer instance
-    //  psaasModel.streamOutputToGeoServer(geoserverUser, geoserverPass, "geowh.vm.sparcsonline.com/geoserver", "psaastests", "psaastest_store", "EPSG:4326");
+    // psaasModel.streamOutputToGeoServer(geoserverUser, geoserverPass, "geowh.vm.sparcsonline.com/geoserver", "psaastests", "psaastest_store", "EPSG:4326");
 
     //test to see if all required parameters have been set
     // this logic is conditional if the model is valid.
@@ -355,5 +364,8 @@ let localDir = path.join(__dirname, '../');
         console.log(psaasModel.inputs);
         psaasModel.inputs.isValid();
     }
-})().then((x) => console.log("Job created, waiting for results."));
+})()
+    .then((x) => {
+        console.log("Job created, waiting for results.")
+    });
 //# sourceMappingURL=example_job.js.map
