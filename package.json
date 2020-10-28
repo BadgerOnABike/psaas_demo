@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "startnt": "node agencies/nt/nwt.js",
-    "webapi-dev": "nodemon webapi/webapi.js"
+    "frontend": "node frontend.js"
   },
   "author": "Heartland Software Solutions Inc.",
   "dependencies": {
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "formidable": "^1.2.1",
     "geojson": "^0.5.0",
+    "is-mobile": "^2.2.2",
     "json-find": "^2.0.3",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.31",
@@ -24,6 +25,7 @@
     "node-fetch": "^2.6.0",
     "node-schedule": "^1.3.2",
     "npm": "^6.9.0",
+    "path": "^0.12.7",
     "protobufjs": "^6.8.8",
     "psaas-js-api": "git+https://spydmobile@bitbucket.org/psaasredapp/psaas-js-api.git",
     "querystring": "^0.2.0",
@@ -33,6 +35,8 @@
     "save": "^2.4.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0",
-    "winston": "^3.3.3"
+    "whoami-exec": "^1.2.2",
+    "winston": "^3.3.3",
+    "ws": "^7.3.1"
   }
 }
