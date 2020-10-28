@@ -3,7 +3,7 @@
  * run this on the PSaaS Box to provide REST API for PSaaS
  */
 
-//const conf = require('./demoApiServerConfig.json')
+import conf from './demoApiServerConfig.json'
 import express from 'express';
 import { initialize } from 'express-openapi';
 import v1WorldsService from './api-v1/services/worldsService.cjs';
@@ -20,5 +20,17 @@ initialize({
     },
     paths: './api-v1/paths'
 });
+// this line is a catch all for development, and will help isolate any stray error that has 
+// not been trapped/catched.
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
-app.listen(3000);
+//app.listen(3000);
+
+app.listen(conf.appPort, () => {
+    console.clear();
+    console.log("========================================================================")
+    console.log(`${conf['app-long-name']} running on PORT ${conf.appPort} `)
+    //console.log('conf', conf)
+
+}
+);

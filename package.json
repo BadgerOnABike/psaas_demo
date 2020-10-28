@@ -8,7 +8,7 @@
     "startnt": "node agencies/nt/nwt.js",
     "frontend": "node frontend.js",
     "devFrontEnd": "nodemon frontend.js",
-    "devApi": "node -r @std/esm demoApiServer.mjs"
+    "devApi": "nodemon -r @std/esm demoApiServer.mjs"
   },
   "author": "Heartland Software Solutions Inc.",
   "dependencies": {

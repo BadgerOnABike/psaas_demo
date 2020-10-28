@@ -5,6 +5,7 @@ export default function (worldsService) {
     };
 
     function GET(req, res, next) {
+        console.log("Getting worlds...")
         res.status(200).json(worldsService.getWorlds(req.query.worldName));
     }
 

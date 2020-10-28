@@ -1,4 +1,4 @@
-// ./api-v1/services/worldsService.js
+// ./api-v1/services/worldsService.cjs
 
 let worlds = {
     Earth: {
@@ -8,6 +8,7 @@ let worlds = {
 
 const worldsService = {
     getWorlds(name) {
+        console.log('Executing getWorlds...', name)
         return worlds[name] ? [worlds[name]] : [];
     }
 };

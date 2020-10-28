@@ -4,5 +4,6 @@
     "localDevHosts": [
         "Francos-MacBook-Pro.local",
         "Francos-MBP"
-    ]
+    ],
+    "appPort": 3009
 }

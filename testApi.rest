@@ -1,5 +1,5 @@
-@localApiServer = http://localhost:3000
+@localApiServer = http://localhost:3009
 
-GET {{localApiServer}}/worlds HTTP/1.1
+GET {{localApiServer}}/v1/worlds?worldName=Earth HTTP/1.1
 ###
 
