@@ -5,5 +5,8 @@
         "Francos-MacBook-Pro.local",
         "Francos-MBP"
     ],
-    "appPort": 3009
+    "appPort": 3009,
+    "psaas": {
+        "meta": "this is a fake psaas config object"
+    }
 }

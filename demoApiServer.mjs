@@ -5,16 +5,17 @@
 
 import conf from './demoApiServerConfig.json'
 import express from 'express';
+import cors from 'cors'
 import { initialize } from 'express-openapi';
 import v1WorldsService from './api-v1/services/worldsService.cjs';
 import v1ConfigService from './api-v1/services/configService.cjs';
-import v1ApiDoc from './api-v1/api-doc';
+import v1ApiDoc from './api-v1/api-doc.js';
 
 const app = express();
+app.use(cors({ preflightContinue: true, credentials: true, origin: ['http://localhost:3009', 'http://localhost:3080'] }));
+
 initialize({
-    app,
-    // NOTE: If using yaml you can provide a path relative to process.cwd() e.g.
-    // apiDoc: './api-v1/api-doc.yml',
+    app: app,
     apiDoc: v1ApiDoc,
     dependencies: {
         worldsService: v1WorldsService,
@@ -22,11 +23,11 @@ initialize({
     },
     paths: './api-v1/paths'
 });
+
 // this line is a catch all for development, and will help isolate any stray error that has 
 // not been trapped/catched.
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
-//app.listen(3000);
 
 app.listen(conf.appPort, () => {
     console.clear();

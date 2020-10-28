@@ -15,6 +15,7 @@
     "@std/esm": "^0.26.0",
     "@turf/turf": "^5.1.6",
     "clear": "^0.1.0",
+    "cors": "^2.8.5",
     "csvtojson": "^2.0.8",
     "dateformat": "^3.0.0",
     "dotenv": "^8.2.0",
@@ -45,6 +46,7 @@
     "ws": "^7.3.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "swagger-ui-dist": "^3.36.0"
   }
 }

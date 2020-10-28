@@ -5,7 +5,7 @@ import conf from '../../demoApiServerConfig.json'
 var psaasConfig
 const getPsaasConfig = () => {
     if (typeof conf['psaas'] == 'undefined') {
-        return { test: 'foo' }
+        return { configMissing: true }
     }
     else {
         return conf['psaas']
