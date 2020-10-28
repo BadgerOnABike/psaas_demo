@@ -7,6 +7,7 @@ import conf from './demoApiServerConfig.json'
 import express from 'express';
 import { initialize } from 'express-openapi';
 import v1WorldsService from './api-v1/services/worldsService.cjs';
+import v1ConfigService from './api-v1/services/configService.cjs';
 import v1ApiDoc from './api-v1/api-doc';
 
 const app = express();
@@ -16,7 +17,8 @@ initialize({
     // apiDoc: './api-v1/api-doc.yml',
     apiDoc: v1ApiDoc,
     dependencies: {
-        worldsService: v1WorldsService
+        worldsService: v1WorldsService,
+        configService: v1ConfigService,
     },
     paths: './api-v1/paths'
 });

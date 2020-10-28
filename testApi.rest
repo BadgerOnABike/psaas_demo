@@ -3,3 +3,5 @@
 GET {{localApiServer}}/v1/worlds?worldName=Earth HTTP/1.1
 ###
 
+GET {{localApiServer}}/v1/config HTTP/1.1
+###

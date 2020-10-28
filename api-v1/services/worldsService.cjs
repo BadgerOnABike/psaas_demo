@@ -1,4 +1,4 @@
-// ./api-v1/services/worldsService.cjs
+// ./api-v1/services/configService.cjs
 
 let worlds = {
     Earth: {
