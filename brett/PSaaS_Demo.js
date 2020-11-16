@@ -11,6 +11,7 @@ const path = require("path");
 const modeller = require("psaas-js-api");
 const luxon_1 = require("luxon");
 const semver = require("semver");
+const { FuelPatch } = require("psaas-js-api/src/psaasInterface");
 let serverConfig = new modeller.defaults.ServerConfiguration();
 
 luxon_1.Settings.defaultZoneName = 'UTC-6'
@@ -71,8 +72,8 @@ if (localDir.includes("@JOBS@")) {
   prom.setLutFile(localDir + "Dogrib_dataset/fbp_lookup_table.csv");
   prom.setTimezoneByValue(18); //hard coded to MDT, see example_timezone.js for an example getting the IDs
   let degree_curing = prom.addGridFile(
-    localDir + "Dogrib_dataset/degree_of_curing.asc",
-    localDir + "Dogrib_dataset/degree_of_curing.prj",
+    localDir + "Dogrib_dataset/degree_of_curing2.asc",
+    localDir + "Dogrib_dataset/degree_of_curing2.prj",
     modeller.psaas.GridFileType.DEGREE_CURING
   );
   let fuel_patch = prom.addLandscapeFuelPatch(
@@ -131,8 +132,9 @@ if (localDir.includes("@JOBS@")) {
     luxon_1.DateTime.fromISO("2001-10-16T21:00:00"),
     modeller.globals.Duration.createTime(21,0,0,false)
   );
-  wpatch.setWindDirOperation(modeller.psaas.WeatherPatchOperation.PLUS, 10);
+  wpatch.setWindDirOperation(modeller.psaas.WeatherPatchOperation.PLUS, 17.6);
   wpatch.setRhOperation(modeller.psaas.WeatherPatchOperation.PLUS, 5);
+  wpatch.setName('Landscape_Wx_patch');
   
   let wpatch2 = prom.addFileWeatherPatch(
     localDir + "Dogrib_dataset/weather_patch_wd270.kmz",
@@ -142,6 +144,7 @@ if (localDir.includes("@JOBS@")) {
     modeller.globals.Duration.createTime(21,0,0,false)
   );
   wpatch2.setWindDirOperation(modeller.psaas.WeatherPatchOperation.EQUAL, 270);
+  wpatch2.setName('Polygon_Wx_patch');
   //create the ignition points
   let ll1 = new modeller.globals.LatLon(51.65287648142513, -115.4779078053444);
   let ig3 = prom.addPointIgnition(ll1, luxon_1.DateTime.fromISO("2001-10-16T13:00:00") );
@@ -198,10 +201,10 @@ if (localDir.includes("@JOBS@")) {
   //scen1.addIgnitionReference(polyign);
   scen1.addWeatherStreamReference(b3Yaha);
   //scen1.addWeatherStreamReference(b3Yaha2);
-  scen1.addWeatherPatchReference(wpatch2, 3);
+  scen1.addWeatherPatchReference(wpatch2, 2);
   scen1.addFuelPatchReference(fuel_patch, 0);
   scen1.addGridFileReference(degree_curing, 1);
-  scen1.addWeatherPatchReference(wpatch, 2);
+  scen1.addWeatherPatchReference(wpatch, 3);
   let ovf1 = prom.addOutputVectorFileToScenario(
     modeller.psaas.VectorFileType.KML,
     "best_fit/perim.kml",
@@ -221,7 +224,6 @@ if (localDir.includes("@JOBS@")) {
     scen1
   );
   ogf1.shouldStream = true;
-  console.log(ogf1);
   let ogf2 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.BURN_GRID,
     "best_fit/burn_grid.tif",
@@ -256,6 +258,34 @@ if (localDir.includes("@JOBS@")) {
     let manager = new modeller.client.JobManager(jobName);
     //start the job manager
     await manager.start();
+    //if possible the job will first be validated, catch the validation response
+    manager.on('validationReceived', (args) => {
+      //the FGM could not be validated. It's possible that the PSaaS version used doesn't support validation
+      if (!args.validation.success) {
+          //this probably means that the PSaaS Manager and PSaaS versions are different, the job may be able to be started without validation
+          //at this point in time but we'll just exit and consider this an unexpected setup
+          args.manager.dispose(); //close the connection that is listening for status updates
+          console.log("Validation could not be run, check your PSaaS version");
+      }
+      //errors were found in the FGM
+      else if (!args.validation.valid) {
+          args.manager.dispose(); //close the connection that is listening for status updates
+          console.log("The submitted FGM is not valid");
+          //just dump the error list, let the user sort through it
+          console.log(args.validation.error_list);
+      }
+      //the FGM is valid, start it running
+      else {
+          console.log("FGM valid, starting job");
+          //add a delay, shouldn't be needed but it's here so the user can see the process happening
+          delay(1000)
+              .then(() => {
+              //use rerun to start the job. Rerun can be used on any job that is in
+              //the finished job list in PSaaS Manager.
+              args.manager.broadcastJobRerun(jobName);
+          });
+      }
+  });
     //when the PSaaS job triggers that it is complete, shut down the listener
     manager.on("simulationComplete", (args) => {
       args.manager.dispose(); //close the connection that is listening for status updates
