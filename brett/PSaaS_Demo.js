@@ -9,7 +9,11 @@ Object.defineProperty(exports, "__esModule", {
 const fs = require("fs");
 const path = require("path");
 const modeller = require("psaas-js-api");
+const luxon_1 = require("luxon");
+const semver = require("semver");
 let serverConfig = new modeller.defaults.ServerConfiguration();
+
+luxon_1.Settings.defaultZoneName = 'UTC-6'
 
 //initialize the connection settings for PSaaS_Builder
 modeller.globals.SocketHelper.initialize(
@@ -65,11 +69,11 @@ if (localDir.includes("@JOBS@")) {
   //add the rest of the files as paths to locations on disk
   prom.setFuelmapFile(localDir + "Dogrib_dataset/fbp_fuel_type.asc");
   prom.setLutFile(localDir + "Dogrib_dataset/fbp_lookup_table.csv");
-  prom.setTimezoneByValue(18); //hard coded to CDT, see example_timezone.js for an example getting the IDs
+  prom.setTimezoneByValue(18); //hard coded to MDT, see example_timezone.js for an example getting the IDs
   let degree_curing = prom.addGridFile(
-    modeller.psaas.GridFileType.DEGREE_CURING,
     localDir + "Dogrib_dataset/degree_of_curing.asc",
-    localDir + "Dogrib_dataset/degree_of_curing.prj"
+    localDir + "Dogrib_dataset/degree_of_curing.prj",
+    modeller.psaas.GridFileType.DEGREE_CURING
   );
   let fuel_patch = prom.addLandscapeFuelPatch(
     "O-1a Matted Grass",
@@ -105,8 +109,8 @@ if (localDir.includes("@JOBS@")) {
     58.0,
     482.0,
     0.0,
-    "2001-09-25",
-    "2001-10-30"
+    luxon_1.DateTime.fromISO("2001-09-25"),
+    luxon_1.DateTime.fromISO("2001-10-30")
   );
 
   //let b3Yaha2 = ws.addWeatherStream(
@@ -121,28 +125,28 @@ if (localDir.includes("@JOBS@")) {
   //  "2001-09-25",
   //  "2001-10-30"
   //);
-
-  let wpatch = prom.addLandscapeWeatherPatch(
-    "2001-10-16T13:00:00",
-    "13:00:00",
-    "2001-10-16T21:00:00",
-    "21:00:00"
+  let wpatch = prom.addLandscapeWeatherPatch( 
+    luxon_1.DateTime.fromISO("2001-10-16T13:00:00"),
+    modeller.globals.Duration.createTime(13,0,0,false),
+    luxon_1.DateTime.fromISO("2001-10-16T21:00:00"),
+    modeller.globals.Duration.createTime(21,0,0,false)
   );
   wpatch.setWindDirOperation(modeller.psaas.WeatherPatchOperation.PLUS, 10);
   wpatch.setRhOperation(modeller.psaas.WeatherPatchOperation.PLUS, 5);
+  
   let wpatch2 = prom.addFileWeatherPatch(
-    localDir + "Dogrib_dataset/weather_patch_wd270.kml",
-    "2001-10-16T13:00:00",
-    "13:00:00",
-    "2001-10-16T21:00:00",
-    "21:00:00"
+    localDir + "Dogrib_dataset/weather_patch_wd270.kmz",
+    luxon_1.DateTime.fromISO("2001-10-16T13:00:00"),
+    modeller.globals.Duration.createTime(13,0,0,false),
+    luxon_1.DateTime.fromISO("2001-10-16T21:00:00"),
+    modeller.globals.Duration.createTime(21,0,0,false)
   );
   wpatch2.setWindDirOperation(modeller.psaas.WeatherPatchOperation.EQUAL, 270);
   //create the ignition points
   let ll1 = new modeller.globals.LatLon(51.65287648142513, -115.4779078053444);
-  let ig3 = prom.addPointIgnition("2001-10-16T13:00:00", ll1);
+  let ig3 = prom.addPointIgnition(ll1, luxon_1.DateTime.fromISO("2001-10-16T13:00:00") );
   let ll2 = new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
-  let ig4 = prom.addPointIgnition("2001-10-16T16:00:00", ll2);
+  let ig4 = prom.addPointIgnition(ll2, luxon_1.DateTime.fromISO("2001-10-16T16:00:00"));
   //let polyign = prom.addFileIgnition(
   //  "2001-10-16T13:00:00",
   //  localDir + "Dogrib_dataset/poly_ign.kmz",
@@ -164,9 +168,9 @@ if (localDir.includes("@JOBS@")) {
     modeller.globals.GlobalStatistics.SCENARIO_NAME
   );
   //create a scenario
-  let scen1 = prom.addScenario("2001-10-16T13:00:00", "2001-10-16T22:00:00");
+  let scen1 = prom.addScenario(luxon_1.DateTime.fromISO("2001-10-16T13:00:00"), luxon_1.DateTime.fromISO("2001-10-16T22:00:00"));
   scen1.setName("Best Dogrib Fit");
-  scen1.addBurningCondition("2001-10-16", 0, 24, 19, 0.0, 95.0, 0.0);
+  scen1.addBurningCondition(luxon_1.DateTime.fromISO("2001-10-16"), 0, 24, 19, 0.0, 95.0, 0.0);
   scen1.setFgmOptions(
     modeller.globals.Duration.createTime(0, 2, 0, false),
     1.0,
@@ -201,8 +205,8 @@ if (localDir.includes("@JOBS@")) {
   let ovf1 = prom.addOutputVectorFileToScenario(
     modeller.psaas.VectorFileType.KML,
     "best_fit/perim.kml",
-    "2001-10-16T13:00:00",
-    "2001-10-16T22:00:00",
+    luxon_1.DateTime.fromISO("2001-10-16T13:00:00"),
+    luxon_1.DateTime.fromISO("2001-10-16T22:00:00"),
     scen1
   );
   ovf1.mergeContact = true;
@@ -212,7 +216,7 @@ if (localDir.includes("@JOBS@")) {
   let ogf1 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.TEMPERATURE,
     "best_fit/temp.txt",
-    "2001-10-16T22:00:00",
+    luxon_1.DateTime.fromISO("2001-10-16T22:00:00"),
     modeller.psaas.Output_GridFileInterpolation.IDW,
     scen1
   );
@@ -221,7 +225,7 @@ if (localDir.includes("@JOBS@")) {
   let ogf2 = prom.addOutputGridFileToScenario(
     modeller.globals.GlobalStatistics.BURN_GRID,
     "best_fit/burn_grid.tif",
-    "2001-10-16T22:00:00",
+    luxon_1.DateTime.fromISO("2001-10-16T22:00:00"),
     modeller.psaas.Output_GridFileInterpolation.IDW,
     scen1
   );
