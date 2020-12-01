@@ -44,6 +44,35 @@ if (localDir.includes("@JOBS@")) {
   );
   process.exit();
 }
+/**
+ * Async
+ * @param t The timeout in milliseconds
+ * @param callback The function that will be called when the delay is up.
+ */
+function delay(t) {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          resolve();
+      }, t);
+  });
+}
+/**
+* Recursively handle nodes of the validation tree and
+* print relevant ones to the console.
+* @param node The node of the validation tree to handle.
+*/
+function handleErrorNode(node) {
+  //leaf node
+  if (node.children.length == 0) {
+      console.error(`'${node.getValue()}' is invalid for '${node.propertyName}': "${node.message}"`);
+  }
+  //branch node
+  else {
+      node.children.forEach(child => {
+          handleErrorNode(child);
+      });
+  }
+}
 //an asynchronous function for creating a job and listening for status messages.
 (async function () {
   //fetch the default settings for some parameters from PSaaS Builder
@@ -72,13 +101,13 @@ if (localDir.includes("@JOBS@")) {
   prom.setLutFile(localDir + "Dogrib_dataset/fbp_lookup_table.csv");
   prom.setTimezoneByValue(18); //hard coded to MDT, see example_timezone.js for an example getting the IDs
   let degree_curing = prom.addGridFile(
-    localDir + "Dogrib_dataset/degree_of_curing2.asc",
-    localDir + "Dogrib_dataset/degree_of_curing2.prj",
+    localDir + "Dogrib_dataset/degree_of_curing.asc",
+    localDir + "Dogrib_dataset/degree_of_curing.prj",
     modeller.psaas.GridFileType.DEGREE_CURING
   );
   let fuel_patch = prom.addLandscapeFuelPatch(
     "O-1a Matted Grass",
-    "O-1b Standing Grass"
+    "C-7 Ponderosa Pine"
   );
   let gravel_road = prom.addFileFuelBreak(
     localDir + "Dogrib_dataset/access_gravel_road.kmz"
@@ -137,7 +166,7 @@ if (localDir.includes("@JOBS@")) {
   wpatch.setName('Landscape_Wx_patch');
   
   let wpatch2 = prom.addFileWeatherPatch(
-    localDir + "Dogrib_dataset/weather_patch_wd270.kmz",
+    localDir + "Dogrib_dataset/weather_patch_wd270.kml",
     luxon_1.DateTime.fromISO("2001-10-16T13:00:00"),
     modeller.globals.Duration.createTime(13,0,0,false),
     luxon_1.DateTime.fromISO("2001-10-16T21:00:00"),
@@ -249,62 +278,93 @@ if (localDir.includes("@JOBS@")) {
   //prom.streamOutputToMqtt();
   //stream output files to a GeoServer instance
   //prom.streamOutputToGeoServer();
-  if (prom.isValid()) {
-    //start the job asynchronously
-    let wrapper = await prom.beginJobPromise();
-    //trim the name of the newly started job
-    let jobName = wrapper.name.replace(/^\s+|\s+$/g, "");
-    //a manager for listening for status messages
-    let manager = new modeller.client.JobManager(jobName);
-    //start the job manager
-    await manager.start();
-    //if possible the job will first be validated, catch the validation response
-    manager.on('validationReceived', (args) => {
-      //the FGM could not be validated. It's possible that the PSaaS version used doesn't support validation
-      if (!args.validation.success) {
-          //this probably means that the PSaaS Manager and PSaaS versions are different, the job may be able to be started without validation
-          //at this point in time but we'll just exit and consider this an unexpected setup
-          args.manager.dispose(); //close the connection that is listening for status updates
-          console.log("Validation could not be run, check your PSaaS version");
-      }
-      //errors were found in the FGM
-      else if (!args.validation.valid) {
-          args.manager.dispose(); //close the connection that is listening for status updates
-          console.log("The submitted FGM is not valid");
-          //just dump the error list, let the user sort through it
-          console.log(args.validation.error_list);
-      }
-      //the FGM is valid, start it running
-      else {
-          console.log("FGM valid, starting job");
-          //add a delay, shouldn't be needed but it's here so the user can see the process happening
-          delay(1000)
-              .then(() => {
-              //use rerun to start the job. Rerun can be used on any job that is in
-              //the finished job list in PSaaS Manager.
-              args.manager.broadcastJobRerun(jobName);
-          });
-      }
-  });
-    //when the PSaaS job triggers that it is complete, shut down the listener
-    manager.on("simulationComplete", (args) => {
-      args.manager.dispose(); //close the connection that is listening for status updates
-      console.log("Simulation complete.");
-    });
-    //catch scenario failure
-    manager.on("scenarioComplete", (args) => {
-      if (!args.success) {
-        console.log(`A scenario failed: ${args.errorMessage}`);
-      }
-    });
-    //listen for statistics at the end of timesteps
-    manager.on("statisticsReceived", (args) => {
-      for (const stat of args.statistics) {
-        console.log(
-          "Received statistic " + stat.key + " with value " + stat.value
-        );
-      }
-    });
+  let errors = prom.checkValid();
+  if (errors.length > 0) {
+      //write the errors to the console
+      errors.forEach(node => {
+          handleErrorNode(node);
+      });
   }
-})().then((x) => console.log("Job created, waiting for results."));
+  else {
+      let wrapper = null;
+      //not yet supported by a released version of PSaaS
+      if (semver.gte(modeller.psaas.VersionInfo.localVersion(modeller.psaas.VersionInfo.version_info), '2.6.1')) {
+          //validate the job asynchronously
+          wrapper = await prom.validateJobPromise();
+      }
+      else {
+          //start the job asynchronously
+          wrapper = await prom.beginJobPromise();
+      }
+      //trim the name of the newly started job
+      let jobName = wrapper.name.replace(/^\s+|\s+$/g, '');
+      //a manager for listening for status messages
+      let manager = new modeller.client.JobManager(jobName);
+      //start the job manager
+      await manager.start();
+      //if possible the job will first be validated, catch the validation response
+      manager.on('validationReceived', (args) => {
+          //the FGM could not be validated. It's possible that the PSaaS version used doesn't support validation
+          if (!args.validation.success) {
+              //this probably means that the PSaaS Manager and PSaaS versions are different, the job may be able to be started without validation
+              //at this point in time but we'll just exit and consider this an unexpected setup
+              args.manager.dispose(); //close the connection that is listening for status updates
+              console.log("Validation could not be run, check your PSaaS version");
+          }
+          //errors were found in the FGM
+          else if (!args.validation.valid) {
+              args.manager.dispose(); //close the connection that is listening for status updates
+              console.log("The submitted FGM is not valid");
+              //just dump the error list, let the user sort through it
+              console.log(args.validation.error_list);
+          }
+          //the FGM is valid, start it running
+          else {
+              console.log("FGM valid, starting job");
+              //add a delay, shouldn't be needed but it's here so the user can see the process happening
+              delay(100)
+                  .then(() => {
+                  //use rerun to start the job. Rerun can be used on any job that is in
+                  //the finished job list in PSaaS Manager.
+                  args.manager.broadcastJobRerun(jobName);
+              });
+          }
+      });
+      //when the PSaaS job triggers that it is complete, shut down the listener
+      manager.on('simulationComplete', (args) => {
+          args.manager.dispose(); //close the connection that is listening for status updates
+          if (args.hasOwnProperty("time") && args.time != null) {
+              console.log(`Simulation complete at ${args.time.toISOString()}.`);
+          }
+          else {
+              console.log("Simulation complete.");
+          }
+      });
+      //catch scenario failure
+      manager.on('scenarioComplete', (args) => {
+          if (!args.success) {
+              if (args.hasOwnProperty("time") && args.time != null) {
+                  console.log(`At ${args.time.toISOString()} a scenario failed: ${args.errorMessage}`);
+              }
+              else {
+                  console.log(`A scenario failed: ${args.errorMessage}`);
+              }
+          }
+      });
+      //listen for statistics at the end of timesteps
+      manager.on('statisticsReceived', (args) => {
+          if (args.hasOwnProperty("time") && args.time != null) {
+              console.log(`Received statistics at ${args.time.toISOString()}`);
+              for (const stat of args.statistics) {
+                  console.log("    Statistic " + stat.key + " with value " + stat.value);
+              }
+          }
+          else {
+              for (const stat of args.statistics) {
+                  console.log("Received statistic " + stat.key + " with value " + stat.value);
+              }
+          }
+      });
+  }
+})().then(x => console.log("Job created, waiting for results."));
 //# sourceMappingURL=example_job.js.map
