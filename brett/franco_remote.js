@@ -389,9 +389,12 @@ function handleErrorNode(node) {
     //a manager for listening for status messages
     let manager = new modeller.client.JobManager(jobName);
     //start the job manager
+    console.log("Trying to start Manager ")
     await manager.start();
+    console.log("Manager has been started")
     //if possible the job will first be validated, catch the validation response
     manager.on('validationReceived', (args) => {
+      console.log("We got validation info back from server")
       //the FGM could not be validated. It's possible that the PSaaS version used doesn't support validation
       if (!args.validation.success) {
         //this probably means that the PSaaS Manager and PSaaS versions are different, the job may be able to be started without validation
@@ -420,6 +423,7 @@ function handleErrorNode(node) {
     });
     //when the PSaaS job triggers that it is complete, shut down the listener
     manager.on('simulationComplete', (args) => {
+      console.log("We got simulationComplete info back from server")
       args.manager.dispose(); //close the connection that is listening for status updates
       if (args.hasOwnProperty("time") && args.time != null) {
         console.log(`Simulation complete at ${args.time.toISOString()}.`);
@@ -430,6 +434,7 @@ function handleErrorNode(node) {
     });
     //catch scenario failure
     manager.on('scenarioComplete', (args) => {
+      console.log("We got scenarioComplete info back from server")
       if (!args.success) {
         if (args.hasOwnProperty("time") && args.time != null) {
           console.log(`At ${args.time.toISOString()} a scenario failed: ${args.errorMessage}`);
@@ -441,6 +446,7 @@ function handleErrorNode(node) {
     });
     //listen for statistics at the end of timesteps
     manager.on('statisticsReceived', (args) => {
+      console.log("We got statisticsReceived info back from server")
       if (args.hasOwnProperty("time") && args.time != null) {
         console.log(`Received statistics at ${args.time.toISOString()}`);
         for (const stat of args.statistics) {
