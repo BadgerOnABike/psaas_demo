@@ -13,7 +13,7 @@ The goal of the repository is to provide a functional example of PSaaS operating
 * do npm i
 * edit config.json
 * run: node PSaaS_Demo.js _Note this is a work in progress_
-* Something failed? Come over to our Discord to ask any questions! www.discord.gg/G2TYZZt
+* Something failed? [Come over to our Discord](https://www.discord.gg/G2TYZZt) to ask any questions!
 
 ### Ran into a show stopping bug?
 
