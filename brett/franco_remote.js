@@ -1,11 +1,11 @@
 "use strict";
 /**
- * An example that creates and runs a job through PSaaS Builder.
+ * An example that creates and runs a job through PSaaS Builder from remote!!!!
  */
 Object.defineProperty(exports, "__esModule", {
   value: true,
 });
-/** ignore this comment */
+
 const fs = require("fs");
 const path = require("path");
 const modeller = require("psaas-js-api");
@@ -48,10 +48,8 @@ modeller.client.JobManager.setDefaults({
 //the directory of the test files
 //make sure the path ends in a trailing slash
 let localDir = path.join(__dirname, "../");
-let remoteDir = `C:\\jobs\\datasets\\`
-//let psaasVersion = /*vers*/ "6.2.5.6"; /*/vers*/
-//make sure the local directory has been configured
-if (remoteDir.includes("@JOBS@")) {
+
+if (localDir.includes("@JOBS@")) {
   console.log(
     "The job directory has not been configured. Please edit the job directory before running the example //server."
   );
@@ -267,17 +265,7 @@ function handleErrorNode(node) {
   let ig3 = prom.addPointIgnition(ll1, luxon_1.DateTime.fromISO("2001-10-16T13:00:00"));
   let ll2 = new modeller.globals.LatLon(51.66090499909746, -115.4086430000001);
   let ig4 = prom.addPointIgnition(ll2, luxon_1.DateTime.fromISO("2001-10-16T16:00:00"));
-  //let polyign = prom.addFileIgnition(
-  //  "2001-10-16T13:00:00",
-  //  remoteDir + "Dogrib_dataset/poly_ign.kmz",
-  //  "This should be a polygon."
-  //);
-  //let lineign = prom.addFileIgnition(
-  //  "2001-10-16T13:00:00",
-  //  remoteDir + "Dogrib_dataset/line_fire.shp",
-  //  "This should be a line."
-  //);
-  //emit some statistics at the end of timesteps
+
   prom.timestepSettings.addStatistic(
     modeller.globals.GlobalStatistics.TOTAL_BURN_AREA
   );
@@ -366,14 +354,17 @@ function handleErrorNode(node) {
   //prom.streamOutputToMqtt();
   //stream output files to a GeoServer instance
   //prom.streamOutputToGeoServer();
+  console.log("Checking for model validity with prom.checkVaild()")
   let errors = prom.checkValid();
   if (errors.length > 0) {
+    console.log("model validity has errors")
     //write the errors to the console
     errors.forEach(node => {
       handleErrorNode(node);
     });
   }
   else {
+    console.log("model validity has no errors")
     let wrapper = null;
     //not yet supported by a released version of PSaaS
     if (semver.gte(modeller.psaas.VersionInfo.localVersion(modeller.psaas.VersionInfo.version_info), '2.6.1')) {
