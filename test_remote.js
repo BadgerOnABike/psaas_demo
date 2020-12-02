@@ -47,7 +47,7 @@ modeller.client.JobManager.setDefaults({
 });
 //the directory of the test files
 //make sure the path ends in a trailing slash
-let localDir = path.join(__dirname, "../");
+let localDir = path.join(__dirname, "./");
 
 if (localDir.includes("@JOBS@")) {
   console.log(
@@ -101,7 +101,7 @@ function handleErrorNode(node) {
     "utf8"
   );
   let fuelmapContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/elevation.prj",
+    localDir + "Dogrib_dataset/fbp_fuel_type.asc",
     "utf8"
   );
 
@@ -120,24 +120,24 @@ function handleErrorNode(node) {
   );
 
   let gravel_roadContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/access_gravel_road.kmz",
-    "utf8"
+    localDir + "Dogrib_dataset/access_gravel_road.kmz"
+    //, "utf8"
   );
 
-  let access_unimproved_roadContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/access_unimproved_road.kmz",
-    "utf8"
-  );
+  // let access_unimproved_roadContents = fs.readFileSync(
+  //   localDir + "Dogrib_dataset/access_unimproved_road.kmz",
+  //   "binary"
+  // );
 
-  let streamContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/hydrology_stream.kmz",
-    "utf8"
-  );
+  // let streamContents = fs.readFileSync(
+  //   localDir + "Dogrib_dataset/hydrology_stream.kmz",
+  //   "binary"
+  // );
 
-  let riverContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/hydrology_river.kmz",
-    "utf8"
-  );
+  // let riverContents = fs.readFileSync(
+  //   localDir + "Dogrib_dataset/hydrology_river.kmz",
+  //   "binary"
+  // );
 
   let weatherStreamContents = fs.readFileSync(
     localDir + "Dogrib_dataset/weather_B3_hourly_20010925to1030.csv",
@@ -160,9 +160,9 @@ function handleErrorNode(node) {
   let curingGridAttachment = prom.addAttachment("degree_of_curing.asc", curingGridContents);
   let curingProjAttachment = prom.addAttachment("degree_of_curing.prj", curingPrjContents);
   let gravel_roadAttachment = prom.addAttachment("access_gravel_road.kmz", gravel_roadContents);
-  let unimproved_roadAttachment = prom.addAttachment("access_unimproved_road.kmz", access_unimproved_roadContents);
-  let riverAttachment = prom.addAttachment("hydrology_river.kmz", riverContents);
-  let streamAttachment = prom.addAttachment("hydrology_stream.kmz", streamContents);
+  // let unimproved_roadAttachment = prom.addAttachment("access_unimproved_road.kmz", access_unimproved_roadContents);
+  // let riverAttachment = prom.addAttachment("hydrology_river.kmz", riverContents);
+  // let streamAttachment = prom.addAttachment("hydrology_stream.kmz", streamContents);
   let weatherStreamAttachment = prom.addAttachment("weather_B3_hourly_20010925to1030.csv", weatherStreamContents);
   let wxPatch2ContentsAttachment = prom.addAttachment("weather_patch_wd270.kml", wxPatch2Contents);
 
@@ -175,9 +175,9 @@ function handleErrorNode(node) {
     !lutFileAttachment ||
     !curingGridAttachment ||
     !curingProjAttachment ||
-    !gravel_roadAttachment ||
-    !streamAttachment ||
-    !riverAttachment ||
+    // !gravel_roadAttachment ||
+    // !streamAttachment ||
+    // !riverAttachment ||
     !weatherStreamAttachment
   ) {
     throw Error("Cannot add attachment");
@@ -198,19 +198,19 @@ function handleErrorNode(node) {
   );
   gravel_road.setName("Gravel Road");
 
-  let unimproved_road = prom.addFileFuelBreak(
-    "" + unimproved_roadAttachment
-  );
-  unimproved_road.setName("Unimproved Road");
+  // let unimproved_road = prom.addFileFuelBreak(
+  //   unimproved_roadAttachment
+  // );
+  // unimproved_road.setName("Unimproved Road");
 
-  let river = prom.addFileFuelBreak(
-    "" + riverAttachment
-  );
-  river.setName("Rivers");
-  let stream = prom.addFileFuelBreak(
-    "" + streamAttachment
-  );
-  stream.setName("Streams");
+  // let river = prom.addFileFuelBreak(
+  //   riverAttachment
+  // );
+  // river.setName("Rivers");
+  // let stream = prom.addFileFuelBreak(
+  //   streamAttachment
+  // );
+  // stream.setName("Streams");
 
   prom.setTimezoneByValue(18); //hard coded to MDT, see example_timezone.js for an example getting the IDs
 
