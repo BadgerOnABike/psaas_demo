@@ -42,7 +42,7 @@ modeller.client.JobManager.setDefaults({
   host: serverConfig.mqttAddress,
   port: serverConfig.mqttPort,
   topic: serverConfig.mqttTopic,
-  username: serverConfig.mqttUsername,
+  username: serverConfig.mqttUser,
   password: serverConfig.mqttPassword,
 });
 //the directory of the test files
