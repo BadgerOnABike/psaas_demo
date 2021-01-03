@@ -155,7 +155,7 @@ function handleErrorNode(node) {
 
   let projAttachment = prom.addAttachment("elevation.prj", projContents);
   let elevAttachment = prom.addAttachment("elevation.asc", elevContents);
-  let fuelMapAttachment = prom.addAttachment("elevation.prj", fuelmapContents);
+  let fuelMapAttachment = prom.addAttachment("fbp_fuel_type.asc", fuelmapContents);
   let lutFileAttachment = prom.addAttachment("fbp_lookup_table.csv", lutFileContents);
   let curingGridAttachment = prom.addAttachment("degree_of_curing.asc", curingGridContents);
   let curingProjAttachment = prom.addAttachment("degree_of_curing.prj", curingPrjContents);
