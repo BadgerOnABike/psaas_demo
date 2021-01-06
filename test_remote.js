@@ -30,7 +30,7 @@ luxon_1.Settings.defaultZoneName = 'UTC-6'
 
 //initialize the connection settings for PSaaS_Builder
 modeller.globals.SocketHelper.initialize(
-  '192.168.80.182',
+  '192.168.80.192',
   serverConfig.builderPort
 );
 //turn on debug messages
@@ -42,7 +42,7 @@ modeller.client.JobManager.setDefaults({
   host: serverConfig.mqttAddress,
   port: serverConfig.mqttPort,
   topic: serverConfig.mqttTopic,
-  username: serverConfig.mqttUsername,
+  username: serverConfig.mqttUser,
   password: serverConfig.mqttPassword,
 });
 //the directory of the test files
