@@ -17,7 +17,7 @@ const { FuelPatch } = require("psaas-js-api/src/psaasInterface");
 
 let serverConfigOverride = {
   builderPort: 32479,
-  builderAddress: '192.168.80.182',
+  builderAddress: '192.168.80.129',
   mqttPort: 1883,
   mqttAddress: 'emqx.vm.sparcsonline.com',
   mqttTopic: 'psaas',
@@ -30,7 +30,7 @@ luxon_1.Settings.defaultZoneName = 'UTC-6'
 
 //initialize the connection settings for PSaaS_Builder
 modeller.globals.SocketHelper.initialize(
-  '192.168.80.192',
+  '192.168.80.129',
   serverConfig.builderPort
 );
 //turn on debug messages
@@ -120,14 +120,13 @@ function handleErrorNode(node) {
   );
 
   let gravel_roadContents = fs.readFileSync(
-    localDir + "Dogrib_dataset/access_gravel_road.kmz"
+    localDir + "Dogrib_dataset/access_gravel_road.kml"
     //, "utf8"
   );
 
-  // let access_unimproved_roadContents = fs.readFileSync(
-  //   localDir + "Dogrib_dataset/access_unimproved_road.kmz",
-  //   "binary"
-  // );
+  let access_unimproved_roadContents = fs.readFileSync(
+    localDir + "Dogrib_dataset/access_unimproved_road.kmz"
+  );
 
   // let streamContents = fs.readFileSync(
   //   localDir + "Dogrib_dataset/hydrology_stream.kmz",
@@ -159,8 +158,8 @@ function handleErrorNode(node) {
   let lutFileAttachment = prom.addAttachment("fbp_lookup_table.csv", lutFileContents);
   let curingGridAttachment = prom.addAttachment("degree_of_curing.asc", curingGridContents);
   let curingProjAttachment = prom.addAttachment("degree_of_curing.prj", curingPrjContents);
-  let gravel_roadAttachment = prom.addAttachment("access_gravel_road.kmz", gravel_roadContents);
-  // let unimproved_roadAttachment = prom.addAttachment("access_unimproved_road.kmz", access_unimproved_roadContents);
+  let gravel_roadAttachment = prom.addAttachment("access_gravel_road.kml", gravel_roadContents);
+  let unimproved_roadAttachment = prom.addAttachment("access_unimproved_road.kmz", access_unimproved_roadContents);
   // let riverAttachment = prom.addAttachment("hydrology_river.kmz", riverContents);
   // let streamAttachment = prom.addAttachment("hydrology_stream.kmz", streamContents);
   let weatherStreamAttachment = prom.addAttachment("weather_B3_hourly_20010925to1030.csv", weatherStreamContents);
@@ -197,12 +196,12 @@ function handleErrorNode(node) {
     "" + gravel_roadAttachment
   );
   gravel_road.setName("Gravel Road");
-
-  // let unimproved_road = prom.addFileFuelBreak(
-  //   unimproved_roadAttachment
-  // );
-  // unimproved_road.setName("Unimproved Road");
-
+  gravel_road.width = 3;
+  let unimproved_road = prom.addFileFuelBreak(
+    unimproved_roadAttachment
+  );
+  unimproved_road.setName("Unimproved Road");
+  unimproved_road.width = 3;
   // let river = prom.addFileFuelBreak(
   //   riverAttachment
   // );
@@ -398,7 +397,7 @@ function handleErrorNode(node) {
         args.manager.dispose(); //close the connection that is listening for status updates
         console.log("The submitted FGM is not valid");
         //just dump the error list, let the user sort through it
-        console.log(args.validation.error_list);
+        console.log(JSON.stringify(args.validation.validation_tree, null, 4));
       }
       //the FGM is valid, start it running
       else {
