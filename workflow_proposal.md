@@ -10,13 +10,16 @@
 6. [New Version Number Format](#version-number)
 7. [Dev builds built by testers](#dev-builds)
 8. [Redmine Migration to Git Hub](#redmine-migration)
+9. [Automatic Community Engagement](#community)
 
 ## <a name="preamble"> Preamble</a>
 Recently I have been working very closely with HSS on a project for NWT, this experience helped me to clearly see some of the conflicts between project expectations and how that is thwarted by developer needs and tools. As a result, I have envisioned a new approach to managing this project that I think will solve some of our more confounding issues and some of our legacy hangovers that are causing trouble. I would like to focus on consensus first, Initially with Myself and Brett, then further with Neal and Rob. When we have this level of consensus, I suspect the rest will fall into line. here are the major points to consider.
 
 ## <a name="repo-branch"> Repo Branch structure</a>
 
-My recent experiences clearly show how beneficial it is to have a master branch and a developer branch, these have clear use cases and can clear up much confusion. The master channel should be used for Releases (not dev builds), while the developer branch would be used for testing fixes
+My recent experiences clearly show how beneficial it is to have a master branch and a developer branch, these have clear use cases and can clear up much confusion. The master channel should be used for Releases (not dev builds), while the developer branch would be used for testing fixes. A further discussion remains to be had if we have a master branch for stable full releases, a beta branch for monthlies and a dev branch. Full stables may be a 6 month release schedule and will be more thoroughly advertised than Beta would be. This ensures the overall user experience is as positive as possible while our Beta community continues to cut the bleeding edge and our developer community is able to source the newest bugs as fast as possible.
+
+Branch management also allows for a logging of progress and work as all commits are tagged and we have a timeline that we can traceback through easily and graphically if needed.
 
 ## <a name="release-schedule"> New Release Schedule</a>
 
@@ -36,7 +39,7 @@ When a new features is requested, it gets developed and results in a new additio
 
 We have a versioning system (A legacy adoption) that does not help in any way other than to differentiate between 6(windows only) and 7 (linux capable). I want to get rid of it instead adopting a more modern scheme typically used for projects that have a lot of moving parts, I chose to emulate the release cycle used in linux distributions keyed off of time rather than developer success. The proposed version number would be like YYYY.MM.DevBuild Number. on release day (1st of the month), the release would be eg. 2021.04.00. For these initial releases we would simply drop the .00, this would be an immediate indicator that an individual is working on a stable beta rather than a dev build.
 
-Any dev build for testing in between releases would increment the end counter, so 26 fixes/features later near the end of feb would be a version 2021.04.26
+Any dev build for testing in between releases would increment the end counter, so 26 fixes/features later near the end of feb would be a version 2021.04.26. These dev builds **are not** to be handed out to members of the broader community as they are for testing purposes only and all successful fixes would be released to the community on the month. See [release schedule](#release-schedule).
 
 ## <a name="dev-builds">Dev builds built by testers</a>
 
@@ -49,7 +52,7 @@ Using migration tools....
 
 ## New Website as a management tool
 
-new semi automated website leverages github and other functionality to be used as a simple management endpoint
+New semi automated website leverages github and other functionality to be used as a simple management endpoint.
 
 ## Two workflows - Simple and Advanced:
 ### Simple Workflow - using website
@@ -60,3 +63,12 @@ This would be a simple read-only(mostly) experience, with limited bug entry and 
 ### Advanced Workflow using Github
 
 For more advanced functionality such as actively collaborating with a developer, communicating bugs and fixes and tests, and project management, the user would simply log into github and work there.
+
+## <a name="community">Automatic Community Engagement</a>
+
+Two layers of community engagement exist that we have yet to fully investigate.
+1. Github - a lot of our user base that we don't know about uses GitHub. I think about the number of tools that I use that the creator has no idea I use. Additionally, I use many of these tools well beyond what they were intended for. 
+   - Missing community - These are the people that aren't fire modellers, will never be fire modellers, but need a thing to spread stuff across space. We've unintentionally excluded these people and that won't change... (we will not intend to serve them). If we're on GitHub though, we have the opportunity to serve the unintended and then they may serve the intended. Word of mouth is one hell of a vector of transmission, the number of people I've turned onto the image recognition tools or audio translation tools or web dev toolkits
+2. Discord - The website has the opportunity to redirect curious folks to our discord server. This has become a very common method of communication within a large number of communities. Further, discord is in the process of pivotting to better suit the business users, we are positioned nicely to leverage the potential incoming business userbase. Discord also has a number of integration structures that allow us to make every stop a one stop shop. Meaning the website, discord server and github page all display roughly the same information. GitHub of course will have more as it's meant for a higher level userbase, but that is not the rule. I am working with a group on the delivery of a bot for a game and we have a community of 10,000, 90% of them are going to GitHub for the first time because they want this bot, anticipate low level users, make documentation that allows them to use the tool from any entry point.
+
+This last paragraph is not in the same vane as the rest of the document but warrants discussion as it is often overlooked. Our current website serve the purpose of serving the tool, but does very little to engage the user. A combination of website, github and discord provide an automated method of engagement that a larger proportion of users will likely take advantage of. Not to mention it provides 2 methods to interact with the dev team in real time.
