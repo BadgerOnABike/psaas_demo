@@ -21,6 +21,9 @@ My recent experiences clearly show how beneficial it is to have a master branch 
 
 Branch management also allows for a logging of progress and work as all commits are tagged and we have a timeline that we can traceback through easily and graphically if needed.
 
+### Quick read on development workflows
+[Successful Git Branching Model](https://nvie.com/posts/a-successful-git-branching-model/)
+
 ### Where we want to be in the short term
 <img src="https://nvie.com/img/main-branches@2x.png">
 
