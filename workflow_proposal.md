@@ -50,6 +50,8 @@ We have a versioning system (A legacy adoption) that does not help in any way ot
 
 Any dev build for testing in between releases would increment the end counter, so 26 fixes/features later near the end of feb would be a version 2021.04.26. These dev builds **are not** to be handed out to members of the broader community as they are for testing purposes only and all successful fixes would be released to the community on the month. See [release schedule](#release-schedule).
 
+Additional option for numbering: https://calver.org/
+
 ## <a name="dev-builds">Dev builds built by testers</a>
 
 We have been pursuing an end target of source code being ready for the public, this is a bad idea, instead we should be encouraging developers to provide buildable projects (Step by step accurate build instructions so that team members can build the dev version themselves. a failure to build would then indicate a problem with build documentation etc. however if Neal, Franco or Brett can build the dev version and test the bugfix/new feature, we have eliminated a huge temporal hurdle waiting for HSS/Mac to build a dev build while they are supposed to be coding bug fixes etc. Further this makes our code far more ready for prime-time well in advance of needing it to be ready for the public or other developers.
