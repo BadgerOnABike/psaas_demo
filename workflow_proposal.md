@@ -62,7 +62,7 @@ We have been pursuing an end target of source code being ready for the public, t
 
 There are several open projects out there to facilitate migration from redmine to github, however, most of them will require either a learning curve, or modification to adpat them to use an old version of redmine, so it would seem that a more realistic and cost effective approach would be to harness the power of the Davinci bot that lives in the PSAAS Discord server. This bot already has access to redmine via its RESTAPI and to GitHub through its official API project. Considering that we want a very specific subset of redmine data from each issue or sub issue to be migrated to github, this makes more sense that to hammer a a square peg into a round hole. Brett and I can work togerther to define the business logic to migrate the isues the way we need them far easier using this mechanism. Another approach we could consider is a hybrid approach, manage issues in Redmine until they are closed, when everything is closed, export everything for posterity and stick with github.
 
-<img src="https://www.dropbox.com/s/v8ps8ctbrd5sp70/Screen%20Shot%202021-02-04%20at%2011.58.26%20AM.png?dl=1">
+<img src="./proposalAssets/davinci_screen_shot.png">
 
 ### <a name="forward-redmine">Moving forward: Github.</a>
 While we can leverage Davinci & other tools to migrate old issues, moving forward, It would make so much more sense to simply used the available features built into github, such as Organizations & PRojects to manage things. Obviously this would require updated Github based workflows to be spelled out.
