@@ -21,6 +21,8 @@ My recent experiences clearly show how beneficial it is to have a master branch 
 
 Branch management also allows for a logging of progress and work as all commits are tagged and we have a timeline that we can traceback through easily and graphically if needed.
 
+<img src="https://nvie.com/img/git-model@2x.png">
+
 ## <a name="release-schedule"> New Release Schedule</a>
 
 Part of our problems stem from a reversal of priorities, currently, this is driven by version numbers, driven by builds, driven by code implementation success by the developer. This approach while doable is neither ideal, nor optimal and lends to the unpredictability of this project. You cant forecast a budget, you cant plan for a release. yet this could very easily be fixed by a new approach. This new approach is currently only a proposal and some variables may require tuning for maximum effectiveness, but in principle it is a s follows:
