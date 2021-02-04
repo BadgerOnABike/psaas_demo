@@ -64,6 +64,7 @@ There are several open projects out there to facilitate migration from redmine t
 
 <img src="./proposalAssets/davinci_screen_shot.png">
 
+
 ### <a name="forward-redmine">Moving forward: Github.</a>
 While we can leverage Davinci & other tools to migrate old issues, moving forward, It would make so much more sense to simply used the available features built into github, such as Organizations & PRojects to manage things. Obviously this would require updated Github based workflows to be spelled out.
 
