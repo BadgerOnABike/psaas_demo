@@ -13,7 +13,7 @@
 9. [Automatic Community Engagement](#community)
 
 ## <a name="preamble"> Preamble</a>
-Recently I have been working very closely with HSS on a project for NWT, this experience helped me to clearly see some of the conflicts between project expectations and how that is thwarted by developer needs and tools. As a result, I have envisioned a new approach to managing this project that I think will solve some of our more confounding issues and some of our legacy hangovers that are causing trouble. I would like to focus on consensus first, Initially with Myself and Brett, then further with Neal and Rob. When we have this level of consensus, I suspect the rest will fall into line. here are the major points to consider.
+Recently I have been working very closely with HSS on a project for NWT, this experience helped me to clearly see some of the conflicts between project expectations and how that is thwarted by developer needs and tools. As a result, I have envisioned a new approach to managing this project that I think will solve some of our more confounding issues and some of our legacy hangovers that are causing trouble. I would like to focus on consensus first, Initially with Myself and Brett, then further with Neal Rob & MAc. When we have this level of consensus, I suspect the rest will fall into line. here are the major points to consider.
 
 ## <a name="repo-branch"> Repo Branch structure</a>
 
