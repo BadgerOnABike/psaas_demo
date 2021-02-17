@@ -22,7 +22,7 @@ psaas_js_api_1.client.JobManager.setDefaults({
 });
 //the directory of the test files
 let localDir = path.join(__dirname, "../");
-let psaasVersion = '6.2.5.7';
+let psaasVersion = '7.2.6.3';
 //make sure the local directory has been configured
 if (localDir.includes('@JOBS@')) {
     console.log("The job directory has not been configured. Please edit the job directory before running the example server.");
