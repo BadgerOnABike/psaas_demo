@@ -79,6 +79,26 @@ Additional option for numbering: [https://calver.org/](https://calver.org/) *Tha
 
 We have been pursuing an end target of source code being ready for the public by rushing to make code public-ready, this is not the best approach as it puts unrealistic pressure on our developers to prematurely make code public before it is ready for public consumption, instead we should be encouraging developers to provide buildable projects (Step by step accurate build instructions so that team members can build the dev version themselves. a failure to build would then indicate a problem with build documentation etc. however if Neal, Franco or Brett can build the dev version and test the bugfix/new feature, we have eliminated a huge temporal hurdle waiting for HSS/Mac to build a dev build while they are supposed to be coding bug fixes etc. Further this makes our code far more ready for prime-time well in advance of needing it to be ready for the public or other developers.
 
+### Dev builds for Version 6
+
+Due to the current inability for testers to generate development builds for themselves some interim logic is required.
+
+This is a work in progress, we are attempting to get the flexibility of GitHub from a geriatric tank mechanic.
+
+As it stands.
+
+A critical rule for development now and into the future.
+**Work will only be performed on items that are in a build request**
+
+Workflow:
+Generate Issue > attach to dev build request > test > pass > attach to release build request
+
+
+
+1. A build request contains items to be worked on.
+2. A build will not be built until it is assigned a version number.
+3. 
+
 ## 8. Redmine Migration to Git Hub
 
 ### 8.1. Migrating Historical Redmine Data to Github
