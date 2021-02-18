@@ -2,28 +2,28 @@
 
 ---
 
-- [1. Preamble](#1-preamble)
-- [2. Repo Branch Structure](#2-repo-branch-structure)
-  - [2.1. Quick read on development workflows](#21-quick-read-on-development-workflows)
-  - [2.2. Where we want to be in the short term](#22-where-we-want-to-be-in-the-short-term)
-  - [2.3. Where we want to be in the long term](#23-where-we-want-to-be-in-the-long-term)
-- [3. New Release Schedule](#3-new-release-schedule)
-- [4. Bug fixes](#4-bug-fixes)
-- [5. New Features](#5-new-features)
-- [6. New Version Number Format](#6-new-version-number-format)
-- [7. Dev builds built by testers](#7-dev-builds-built-by-testers)
-  - [Dev builds for Version 6](#dev-builds-for-version-6)
-- [8. Redmine Migration to Git Hub](#8-redmine-migration-to-git-hub)
-  - [8.1. Migrating Historical Redmine Data to Github](#81-migrating-historical-redmine-data-to-github)
-- [9. Licencing](#9-licencing)
-  - [9.1. Pre-release licencing](#91-pre-release-licencing)
-  - [9.2. Open source licenses](#92-open-source-licenses)
-- [10. New Website as a management tool](#10-new-website-as-a-management-tool)
-  - [10.1. Moving forward: Github](#101-moving-forward-github)
-- [11. Two workflows - Simple and Advanced](#11-two-workflows---simple-and-advanced)
-  - [11.1. Simple Workflow - using website](#111-simple-workflow---using-website)
-  - [11.2. Advanced Workflow using Github](#112-advanced-workflow-using-github)
-- [12. Community Engagement](#12-community-engagement)
+- [PSaaS 2021 Administration Roadmap](#psaas-2021-administration-roadmap)
+  - [1. Preamble](#1-preamble)
+  - [2. Repo Branch Structure](#2-repo-branch-structure)
+    - [2.1. Quick read on development workflows](#21-quick-read-on-development-workflows)
+    - [2.2. Where we want to be in the short term](#22-where-we-want-to-be-in-the-short-term)
+    - [2.3. Where we want to be in the long term](#23-where-we-want-to-be-in-the-long-term)
+  - [3. New Release Schedule](#3-new-release-schedule)
+  - [4. Bug fixes](#4-bug-fixes)
+  - [5. New Features](#5-new-features)
+  - [6. New Version Number Format](#6-new-version-number-format)
+  - [7. Dev builds built by testers](#7-dev-builds-built-by-testers)
+  - [8. Redmine Migration to Git Hub](#8-redmine-migration-to-git-hub)
+    - [8.1. Migrating Historical Redmine Data to Github](#81-migrating-historical-redmine-data-to-github)
+  - [9. Licencing](#9-licencing)
+    - [9.1. Pre-release licencing](#91-pre-release-licencing)
+    - [9.2. Open source licenses](#92-open-source-licenses)
+  - [10. New Website as a management tool](#10-new-website-as-a-management-tool)
+    - [10.1. Moving forward: Github](#101-moving-forward-github)
+  - [11. Two workflows - Simple and Advanced](#11-two-workflows---simple-and-advanced)
+    - [11.1. Simple Workflow - using website](#111-simple-workflow---using-website)
+    - [11.2. Advanced Workflow using Github](#112-advanced-workflow-using-github)
+  - [12. Community Engagement](#12-community-engagement)
 
 ---
 
@@ -152,6 +152,6 @@ Two layers of community engagement exist that we have yet to fully take advantag
    - Website automation and integration - Git hub has a great API to allow us to grab important project information directly from the source to be published auto-magically to an automated website without the need for a webmaster to constantly push updates to the site from project materials.
   
 2. Discord - A semi-automated  website has the opportunity to redirect curious folks to our discord server.
-   - This has become a very common method of communication within a large number of communities. Further, discord is in the process of pivoting to better suit the business users, we are positioned nicely to leverage the potential incoming business userbase. 
+   - This has become a very common method of communication within a large number of communities. Further, discord is in the process of pivoting to better suit the business users, we are positioned nicely to leverage the potential incoming business userbase.
    - Discord also has a number of integration structures that allow us to make every stop a one stop shop. Meaning the website, discord server and github page all display roughly the same information. GitHub of course will have more as it's meant for a higher level userbase, but that is not the rule. As an example, a number of video games provide software such as bots to operate functions on behalf of users. Many of these users are experiencing GitHub for the first time through this process and have questions that can be answered in realtime with a connected discord. By providing instructions in the GitHub and a discord server users have the option of solving their own problems or asking for help.
    - Our current website serves the purpose of serving the tool, but does very little to engage the user. A combination of website, github and discord provide an automated method of engagement that a larger proportion of users will likely take advantage of. Not to mention it provides 2 methods to interact with the dev team in real time. This also provides a method to limit the burden of individual developers/developer community members responding to issues the community has, simultaneously saving our inboxes.

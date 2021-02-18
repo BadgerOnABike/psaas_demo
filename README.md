@@ -6,6 +6,10 @@ Prometheus Software as a Service (PSaaS) is an implementation of Prometheus: The
 
 The goal of the repository is to provide a functional example of PSaaS operating with the JavaScript API. The demo focuses on the Dogrib area as a unit test to compare with previous testing. Additionally we intend to show off all possible functionality of the tool within this series of scripts.
 
+### Branch Approach
+
+Please make changes/pull requests to the developer branch, and reserve the master branch for tagged releases.
+
 ### Setup and basic use
 
 * Clone the repo
