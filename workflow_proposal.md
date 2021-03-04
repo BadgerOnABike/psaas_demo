@@ -2,28 +2,28 @@
 
 ---
 
-- [PSaaS 2021 Administration Roadmap](#psaas-2021-administration-roadmap)
-  - [1. Preamble](#1-preamble)
-  - [2. Repo Branch Structure](#2-repo-branch-structure)
-    - [2.1. Quick read on development workflows](#21-quick-read-on-development-workflows)
-    - [2.2. Where we want to be in the short term](#22-where-we-want-to-be-in-the-short-term)
-    - [2.3. Where we want to be in the long term](#23-where-we-want-to-be-in-the-long-term)
-  - [3. New Release Schedule](#3-new-release-schedule)
-  - [4. Bug fixes](#4-bug-fixes)
-  - [5. New Features](#5-new-features)
-  - [6. New Version Number Format](#6-new-version-number-format)
-  - [7. Dev builds built by testers](#7-dev-builds-built-by-testers)
-  - [8. Redmine Migration to Git Hub](#8-redmine-migration-to-git-hub)
-    - [8.1. Migrating Historical Redmine Data to Github](#81-migrating-historical-redmine-data-to-github)
-  - [9. Licencing](#9-licencing)
-    - [9.1. Pre-release licencing](#91-pre-release-licencing)
-    - [9.2. Open source licenses](#92-open-source-licenses)
-  - [10. New Website as a management tool](#10-new-website-as-a-management-tool)
-    - [10.1. Moving forward: Github](#101-moving-forward-github)
-  - [11. Two workflows - Simple and Advanced](#11-two-workflows---simple-and-advanced)
-    - [11.1. Simple Workflow - using website](#111-simple-workflow---using-website)
-    - [11.2. Advanced Workflow using Github](#112-advanced-workflow-using-github)
-  - [12. Community Engagement](#12-community-engagement)
+- [1. Preamble](#1-preamble)
+- [2. Repo Branch Structure](#2-repo-branch-structure)
+  - [2.1. Quick read on development workflows](#21-quick-read-on-development-workflows)
+  - [2.2. Where we want to be in the short term](#22-where-we-want-to-be-in-the-short-term)
+  - [2.3. Where we want to be in the long term](#23-where-we-want-to-be-in-the-long-term)
+- [3. New Release Schedule](#3-new-release-schedule)
+- [4. Bug fixes](#4-bug-fixes)
+- [5. New Features](#5-new-features)
+- [6. New Version Number Format](#6-new-version-number-format)
+- [7. Dev builds built by testers](#7-dev-builds-built-by-testers)
+  - [Dev builds for Version 6](#dev-builds-for-version-6)
+- [8. Redmine Migration to Git Hub](#8-redmine-migration-to-git-hub)
+  - [8.1. Migrating Historical Redmine Data to Github](#81-migrating-historical-redmine-data-to-github)
+- [9. Licencing](#9-licencing)
+  - [9.1. Pre-release licencing](#91-pre-release-licencing)
+  - [9.2. Open source licenses](#92-open-source-licenses)
+- [10. New Website as a management tool](#10-new-website-as-a-management-tool)
+  - [10.1. Moving forward: Github](#101-moving-forward-github)
+- [11. Two workflows - Simple and Advanced](#11-two-workflows---simple-and-advanced)
+  - [11.1. Simple Workflow - using website](#111-simple-workflow---using-website)
+  - [11.2. Advanced Workflow using Github](#112-advanced-workflow-using-github)
+- [12. Community Engagement](#12-community-engagement)
 
 ---
 
@@ -74,6 +74,8 @@ We have a versioning system (A legacy adoption) that does not help in any way ot
 Any dev build for testing in between releases would increment the end counter, so 26 fixes/features later near the end of feb would be a version 2021.04.26. These dev builds **are not** to be handed out to members of the broader community as they are for testing purposes only and all successful fixes would be released to the community on the month. See [release schedule](#release-schedule).
 
 Additional option for numbering: [https://calver.org/](https://calver.org/) *Thank you Rob Kruus for this suggestion*
+
+Currently manager cares about Version 6 versus Version 7. As such we suggest adding an "edition" for the manager to check. This is not something that would be a part of the installer, rather it would be within the program for manager to check in order to define it's capabilities.
 
 ## 7. Dev builds built by testers
 
