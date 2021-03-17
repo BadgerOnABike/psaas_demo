@@ -33,6 +33,8 @@ Recently we (Franco and Brett) have had some eye opening developer experiences t
 
 Here are the major points to consider.
 
+If you have feed back comment on Issue #19 here https://github.com/BadgerOnABike/psaas_demo/issues/19 or bring up an issue during a call.
+
 ## 2. Repo Branch Structure
 
 Our recent experiences clearly show how beneficial it is to have a more robust branch structure, eg. master branch and a developer branch. These have clear use cases and can clear up much confusion. Typically the Project Team never sees the complex branching models used by developers, and so we want the whole team to become situationally aware of the branching structures that will be exposed to the Project Team. This is not about forcing developers to use more or less branches, but rather , a simplified but robust branching structure that will be used when the Project Team utilizes a project repo that has been shared to the team. Initially we want to see Team repositories (Those exposed to the project team) have a master and developer branch. The master channel should be used for Releases (not dev builds), while the developer branch would be used for testing fixes & new features. A further discussion remains to be had if we have a master branch for stable full releases, a beta branch for monthlies and a dev branch. Full stables may be a 6 month release schedule and will be more thoroughly advertised than Beta would be. This ensures the overall user experience is as positive as possible while our Beta community continues to cut the bleeding edge and our developer community is able to source the newest bugs as fast as possible.
